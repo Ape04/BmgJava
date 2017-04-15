@@ -22,4 +22,5 @@ public interface IUser {
     public void inscriptionUser(User user);
     public void insertAdmin(User user);
     public User retrieveAdminByLogin(String login) ;
+    public int retrieveUserByLogin(String login);
 }

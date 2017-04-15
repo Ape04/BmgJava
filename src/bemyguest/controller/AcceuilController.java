@@ -8,6 +8,7 @@ package bemyguest.controller;
 import bemyguest.DAO.Classe.ProprieteCrud;
 import bemyguest.entities.Propriete;
 import bemyguest.DAO.Classe.ResevationDAO;
+import static bemyguest.DAO.Classe.UserDAO.j;
 import com.jfoenix.controls.JFXTextField;
 import java.io.BufferedReader;
 import java.io.IOException;

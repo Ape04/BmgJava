@@ -22,6 +22,7 @@ import bemyguest.config.ConnectionDB;
 public class UserDAO implements IUser {
 
     Connection connexion = ConnectionDB.getConnexion();
+    public static int j;
 
     @Override
     public void inscriptionUser(User user) {
@@ -253,6 +254,27 @@ public class UserDAO implements IUser {
                         return null;
             }
         
+    }
+
+    @Override
+    public int retrieveUserByLogin(String login) {
+        
+        String req = "select id_u from utilisateur where login = '" + login + "' and role='guest'  ";
+        try {
+           
+            PreparedStatement prt = connexion.prepareStatement(req);
+
+            ResultSet res = prt.executeQuery();
+             while(res.next()){
+            j=res.getInt("id_u");}
+                        return j;
+                     
+            } catch (SQLException ex) {
+                
+                System.out.println("Echec d'afficher cet utilisateur ! " + ex.getMessage());
+           
+                        return 0;
+            }
     }
 
 }

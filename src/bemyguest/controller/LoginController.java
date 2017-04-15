@@ -1,6 +1,8 @@
 package bemyguest.controller;
 
 
+import bemyguest.DAO.Classe.UserDAO;
+import static bemyguest.DAO.Classe.UserDAO.j;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -226,6 +228,8 @@ public class LoginController implements Initializable {
             } else {
 
                 String req2 = "SELECT * FROM utilisateur where login=? and password=? and role='guest' ";
+                UserDAO dao=new UserDAO();
+                j=dao.retrieveUserByLogin(txt_user.getText());
 
                 pst = connexion.prepareStatement(req2);
                 pst.setString(1, txt_user.getText());
@@ -237,13 +241,13 @@ public class LoginController implements Initializable {
                 if (rs.next()) {
                     {           
                         try {
-                            
                             Parent nn = FXMLLoader.load(getClass().getResource("/bemyguest/gui/AcceuilFXML.fxml"));
                             Scene scene2 = new Scene(nn);
                             scene2.getStylesheets().add("/bemyguset/resource/mainSheet.css");
                             Stage stagey = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             stagey.setScene(scene2);
                             stagey.show();
+                            System.out.println(j);
 
                         } catch (Exception e) {
                             System.out.println("Guest : " + e);
