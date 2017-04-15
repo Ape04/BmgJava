@@ -124,7 +124,6 @@ public class AcceuilController implements Initializable {
     @FXML
     private void GoHome(ActionEvent event) throws IOException {
         Parent login = FXMLLoader.load(getClass().getResource("/bemyguest/gui/Login.fxml"));
-        
         Scene scene = new Scene(login);
          scene.getStylesheets().add("/bemyguset/resource/style.css");
 
