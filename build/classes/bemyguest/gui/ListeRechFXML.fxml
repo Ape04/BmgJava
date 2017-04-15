@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:id="afficher1" prefHeight="608.0" prefWidth="1186.0" styleClass="corpsPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.gui.ListeRechFXMLController">
+   <children>
+      <ImageView fitHeight="100.0" fitWidth="410.0" layoutX="394.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/Welcome.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="115.0" layoutY="72.0" prefHeight="45.0" prefWidth="817.0">
+         <children>
+            <HBox layoutX="-5.0" prefHeight="37.0" prefWidth="817.0" spacing="5.0">
+               <children>
+                  <JFXTextField fx:id="place" promptText="Où ?" />
+                  <DatePicker fx:id="depart" prefHeight="31.0" prefWidth="190.0" promptText="Depart" />
+                  <DatePicker fx:id="arrivee" prefHeight="31.0" prefWidth="188.0" promptText="Arrivée" />
+                  <ComboBox fx:id="nbVoyageur" prefWidth="150.0" promptText="Voyageur?" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <Button fx:id="btn_rechercher" defaultButton="true" layoutX="349.0" layoutY="117.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="345.0" styleClass="btnEnvoyer" stylesheets="@../../../../../Desktop/application%20DESKTOP/tft/src/frontend/mainSheet.css" text="Rechercher" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

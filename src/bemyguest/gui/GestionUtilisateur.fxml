@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="573.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.GestionUtilisateurController">
+   <children>
+      <Pane prefHeight="573.0" prefWidth="932.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton fx:id="btn_deleteAdmin" layoutX="356.0" layoutY="490.0" onAction="#deleteAdminEvent" prefHeight="31.0" prefWidth="121.0" text="Supprimer" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label fx:id="lbl_id" layoutX="14.0" layoutY="269.0" />
+            <Text fill="#579dff" layoutX="262.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GESTION D'UTILISATEURS">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tableViewAdmin" layoutX="14.0" layoutY="54.0" onMouseClicked="#ShowOnClick" prefHeight="413.0" prefWidth="738.0">
+               <columns>
+                  <TableColumn fx:id="columnNom" prefWidth="97.0" text="NOM" />
+                  <TableColumn fx:id="columnPrenom" prefWidth="96.0" text="PRENOM" />
+                  <TableColumn fx:id="columnEmail" minWidth="0.0" prefWidth="169.0" text="EMAIL" />
+                  <TableColumn fx:id="columnLogin" prefWidth="150.0" text="LOGIN" />
+                  <TableColumn fx:id="columnId" prefWidth="73.0" text="id" visible="false" />
+                  <TableColumn fx:id="columDate" prefWidth="127.0" text="Date naissance" />
+                  <TableColumn fx:id="columnTel" prefWidth="98.0" text="NUMTEL" />
+               </columns>
+            </TableView>
+            <JFXTextField fx:id="txt_search2" labelFloat="true" layoutX="796.0" layoutY="272.0" maxWidth="121.0" minWidth="109.0" prefHeight="31.0" prefWidth="121.0" promptText="Rechercher" />
+            <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="761.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../src/Search-button.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="149.0" layoutX="769.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../src/people.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="56.0" fitWidth="54.0" layoutX="208.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../src/user.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

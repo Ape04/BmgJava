@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="afficherMesagerie" prefHeight="616.0" prefWidth="1236.0" styleClass="corpsPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.DiscussionFXMLController">
+   <children>
+      <VBox fx:id="VboxDisc" layoutX="14.0" layoutY="-43.0" prefHeight="692.0" prefWidth="1305.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Discussion" wrappingWidth="189.6708984375" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font size="39.0" />
+               </font>
+            </Text>
+            <SplitPane dividerPositions="0.2885648503453569" VBox.vgrow="ALWAYS">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="638.0" prefWidth="58.0">
+                     <children>
+                        <TableView fx:id="tableView" minHeight="350.0" prefHeight="638.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="columnNom" prefWidth="125.0" text="Nom" />
+                              <TableColumn fx:id="columnPrenom" prefWidth="125.0" text="Prenom" />
+                              <TableColumn fx:id="columnId_f" prefWidth="75.0" text="Column X" visible="false" />
+                              <TableColumn fx:id="columnId_u" prefWidth="75.0" text="Column X" visible="false" />
+                              <TableColumn fx:id="columnNick" prefWidth="75.0" text="Alias" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane>
+                     <children>
+                        <VBox prefHeight="638.0" prefWidth="923.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <JFXTextArea fx:id="contenu" editable="false" wrapText="true" VBox.vgrow="ALWAYS" />
+                              <JFXTextField fx:id="message" editable="false" style="-fx-background-color: white;" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </VBox>
+      <JFXButton id="btn" fx:id="btnEnvoie" defaultButton="true" layoutX="1260.0" layoutY="620.0" prefHeight="26.0" prefWidth="123.0" stylesheets="@../../bemyguset/resource/mainSheet.css" text="Envoyer" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>

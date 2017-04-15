@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="760.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.DiscussionFXMLController">
+   <children>
+      <VBox layoutX="196.0" layoutY="251.0" prefHeight="760.0" prefWidth="1028.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Discussion" wrappingWidth="833.6708984375">
+               <font>
+                  <Font size="39.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Text>
+            <HBox prefHeight="572.0" prefWidth="1028.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <SplitPane prefHeight="708.0" prefWidth="296.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="706.0" prefWidth="220.0">
+                           <children>
+                              <TableView fx:id="tableView" prefHeight="706.0" prefWidth="255.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="columnNom" prefWidth="100.0" text="Nom" />
+                                    <TableColumn fx:id="columnPrenom" prefWidth="94.0" text="Prenom" />
+                                    <TableColumn fx:id="columnId_f" prefWidth="75.0" text="Column X" visible="false" />
+                                    <TableColumn fx:id="columnId_u" prefWidth="75.0" text="Column X" visible="false" />
+                                    <TableColumn fx:id="columnAlias" prefWidth="99.0" text="Alias" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+                  <VBox prefHeight="663.0" prefWidth="631.0">
+                     <children>
+                        <JFXTextArea fx:id="contenu" editable="false" maxWidth="829.0" minWidth="631.0" prefHeight="800.0" prefWidth="631.0" wrapText="true" />
+                        <JFXTextArea fx:id="message" editable="false" layoutX="10.0" layoutY="10.0" maxWidth="829.0" minWidth="612.0" prefHeight="58.0" prefWidth="656.0" wrapText="true" />
+                        <JFXButton fx:id="btnEnvoie" prefHeight="46.0" prefWidth="666.0" text="Envoie" visible="false" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="btnAjout" mnemonicParsing="false" onAction="#AddFavoris" text="Button" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

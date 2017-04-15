@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="793.0" prefWidth="1483.0" styleClass="backGroundPane" stylesheets="@../../bemyguset/resource/mainSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.ReservationController">
+   <children>
+      <AnchorPane id="menuContainer" layoutY="127.0" prefHeight="585.0" prefWidth="165.0" stylesheets="@../bemyguset/resource/mainSheet.css">
+         <children>
+            <Button fx:id="menuCup" layoutY="164.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Gestion Experience" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgCup" />
+               </styleClass>
+            </Button>
+            <Button fx:id="menuClub" layoutY="119.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Gestion Offre" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="bgClub" />
+                  <String fx:value="menuBoutons" />
+               </styleClass>
+            </Button>
+            <Button fx:id="menuFormation" layoutY="299.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Rechercher Hot" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgFormation" />
+               </styleClass>
+            </Button>
+            <Button layoutY="495.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Deconnexion" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgDeconnexion" />
+               </styleClass>
+            </Button>
+            <Label layoutX="33.0" layoutY="45.0" prefHeight="17.0" prefWidth="66.0" text="       Host" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="menuMessage" layoutY="450.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Boite de reception" textFill="WHITE" wrapText="true">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgMessage" />
+               </styleClass>
+            </Button>
+            <Button fx:id="menuMatch" layoutY="254.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Consulter Hot" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgMatchs" />
+               </styleClass>
+            </Button>
+            <Button fx:id="traiter_reservation" layoutY="209.0" mnemonicParsing="false" onAction="#handleButtonTraiterAction" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Traiter Reservation" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgStade" />
+               </styleClass>
+            </Button>
+            <Button fx:id="menuCompetition" layoutY="344.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Gerer Compte" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgCup" />
+               </styleClass>
+            </Button>
+            <Button fx:id="list_d" layoutY="389.0" mnemonicParsing="false" onAction="#handleButtonListAction" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="List Reservation" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="bgClub" />
+                  <String fx:value="menuBoutons" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label id="Copyright" layoutX="165.0" layoutY="724.0" prefHeight="65.0" prefWidth="112.0" text="  2017 Copyright" textFill="WHITE" />
+      <Label id="Developped By" layoutX="1171.0" layoutY="735.0" prefHeight="65.0" prefWidth="218.0" text="Developped by Pi_Squad" textFill="WHITE" />
+      <AnchorPane id="titlePane" layoutX="165.0" layoutY="63.0" prefHeight="53.0" prefWidth="1238.0" styleClass="titlePane">
+         <children>
+            <Label fx:id="titelLabel" layoutX="27.0" layoutY="8.0" text="Gestion Des Reservation">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="gmail" fitHeight="39.0" fitWidth="45.0" layoutX="954.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Desktop/application%20DESKTOP/tftpidev_apresGitOK/tftpidev/src/esprit/ressources/images/gmail.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="1001.0" layoutY="18.0" prefHeight="17.0" prefWidth="49.0" text="Gmail" />
+            <Pane id="PanePourDeplacer" layoutX="280.0" layoutY="-9.0" prefHeight="45.0" prefWidth="1004.0">
+               <children>
+                  <Label layoutX="50.0" layoutY="9.0" text="Espace   Host" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="emchi" layoutX="166.0" layoutY="116.0" prefHeight="608.0" prefWidth="1283.0" styleClass="corpsPane" stylesheets="@../bemyguset/resource/mainSheet.css">
+         <children>
+            <Label id="Copyright" fx:id="label1" layoutX="977.0" layoutY="202.0" prefHeight="39.0" prefWidth="289.0" style="-fx-background-color: #d9dce0;" styleClass="titlePane" textFill="#514040" />
+            <Label id="Copyright" fx:id="label_prenom11" layoutX="977.0" layoutY="280.0" prefHeight="39.0" prefWidth="289.0" style="-fx-background-color: #d9dce0;" styleClass="titlePane" textFill="#514040" />
+            <Label id="Copyright" fx:id="label_prenom121" layoutX="977.0" layoutY="358.0" prefHeight="39.0" prefWidth="289.0" style="-fx-background-color: #d9dce0;" styleClass="titlePane" textFill="#514040" />
+            <Label id="Copyright" fx:id="label_prenom1221" layoutX="977.0" layoutY="436.0" prefHeight="39.0" prefWidth="289.0" style="-fx-background-color: #d9dce0;" styleClass="titlePane" textFill="#514040" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

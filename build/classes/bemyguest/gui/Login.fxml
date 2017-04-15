@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="anchLogin" prefHeight="511.0" prefWidth="737.0" style="-fx-background-color: linear-gradient(#5697ff,white 100%);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.LoginController">
+   <children>
+      <Pane fx:id="paneLogin" layoutX="213.0" layoutY="32.0" prefHeight="511.0" prefWidth="737.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton fx:id="btn_connect" defaultButton="true" layoutX="232.0" layoutY="398.0" onAction="#connectEvent" prefHeight="48.0" prefWidth="123.0" text="Se connecter" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btn_inscription" layoutX="383.0" layoutY="398.0" onAction="#inscriptionEvent" prefHeight="48.0" prefWidth="123.0" text="S'inscrire" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <GridPane fx:id="paneOfLogin" layoutX="246.0" layoutY="118.0" prefHeight="263.0" prefWidth="274.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="121.0" minWidth="0.0" prefWidth="26.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="248.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXTextField fx:id="txt_user" focusColor="#70a6ff" labelFloat="true" maxWidth="231.0" minWidth="231.0" prefHeight="31.0" prefWidth="231.0" promptText="Nom d'utilisateur" unFocusColor="#1c6fff" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXPasswordField fx:id="txt_passwd" focusColor="#70a6ff" labelFloat="true" maxWidth="237.0" minWidth="231.0" prefHeight="31.0" prefWidth="231.0" promptText="Mot de passe" unFocusColor="#1c6fff" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ImageView fitHeight="29.0" fitWidth="24.0" opacity="0.18" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../src/email_black.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="27.0" fitWidth="22.0" opacity="0.18" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../src/Security-Password.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="294.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../src/user-icon-png-pnglogocom.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="271.0" layoutY="472.0" onAction="#ForgetPassword" prefHeight="25.0" prefWidth="195.0" text="Mot de passe oublié" textFill="#6287ff">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="12.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Text fill="#76a0ee" layoutX="20.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PiSquad" />
+      <Text fill="#76a0ee" layoutX="666.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2016-2017" />
+   </children>
+</AnchorPane>

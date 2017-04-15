@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="acc" prefHeight="756.0" prefWidth="1489.0" styleClass="backGroundPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.AcceuilController">
+   <children>
+      <AnchorPane fx:id="afficher" layoutX="175.0" layoutY="117.0" prefHeight="608.0" prefWidth="1186.0" styleClass="corpsPane">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="410.0" layoutX="394.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../imgs/Welcome.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="115.0" layoutY="72.0" prefHeight="45.0" prefWidth="817.0">
+               <children>
+                  <HBox layoutX="-5.0" prefHeight="37.0" prefWidth="817.0" spacing="5.0">
+                     <children>
+                        <JFXTextField fx:id="place" promptText="Où ?" />
+                        <DatePicker fx:id="depart" prefHeight="31.0" prefWidth="190.0" promptText="Depart" />
+                        <DatePicker fx:id="arrivee" prefHeight="31.0" prefWidth="188.0" promptText="Arrivée" />
+                        <ComboBox fx:id="nbVoyageur" prefWidth="150.0" promptText="Voyageur?" />
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Button fx:id="btn_rechercher" defaultButton="true" layoutX="349.0" layoutY="117.0" mnemonicParsing="false" onAction="#rechercher" prefHeight="45.0" prefWidth="345.0" styleClass="btnEnvoyer" stylesheets="@../../../../../Desktop/application%20DESKTOP/tft/src/frontend/mainSheet.css" text="Rechercher" textAlignment="CENTER" />
+            <TableView fx:id="tableRech" layoutX="194.0" layoutY="216.0" prefHeight="277.0" prefWidth="735.0" visible="false">
+              <columns>
+                <TableColumn fx:id="clm_id" prefWidth="75.0" text="C1" visible="false" />
+                <TableColumn fx:id="clm_categorie" prefWidth="182.0" text="Categorie" />
+                  <TableColumn fx:id="clm_type" prefWidth="164.0" text="Type" />
+                  <TableColumn fx:id="clm_ville" prefWidth="186.0" text="Ville" />
+                  <TableColumn fx:id="clm_prix" prefWidth="202.0" text="Prix" />
+              </columns>
+            </TableView>
+            <Button fx:id="btn_reserver" defaultButton="true" layoutX="989.0" layoutY="525.0" mnemonicParsing="false" onAction="#callURL" prefHeight="45.0" prefWidth="137.0" styleClass="btnEnvoyer" stylesheets="@../../../../../Desktop/application%20DESKTOP/tft/src/frontend/mainSheet.css" text="Reserver" textAlignment="CENTER" visible="false" />
+         </children>
+      </AnchorPane>
+      <Label id="Copyright" layoutX="174.0" layoutY="725.0" prefHeight="65.0" prefWidth="112.0" text="  2017 Copyright" textFill="WHITE" />
+      <Label id="Developped By" layoutX="1161.0" layoutY="725.0" prefHeight="65.0" prefWidth="218.0" text="Developped by Pi_Squad" textFill="WHITE" />
+      <AnchorPane id="menuContainer" layoutX="9.0" layoutY="117.0" prefHeight="585.0" prefWidth="165.0">
+         <children>
+            <Button fx:id="menuCup" layoutY="209.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Gestion Experience" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgCup" />
+               </styleClass>
+            </Button>
+            <Button fx:id="menuClub" layoutY="164.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Gestion Offre" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="bgClub" />
+                  <String fx:value="menuBoutons" />
+               </styleClass>
+            </Button>
+            <Button fx:id="menuFormation" layoutY="119.0" mnemonicParsing="false" onAction="#ShowAcc" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Acceuil" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgFormation" />
+               </styleClass>
+            </Button>
+            <Button fx:id="deconnexion" layoutY="482.0" mnemonicParsing="false" onAction="#GoHome" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Deconnexion" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgDeconnexion" />
+               </styleClass>
+            </Button>
+            <Label layoutX="33.0" layoutY="45.0" prefHeight="17.0" prefWidth="66.0" text="       Host" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="menuMessage" layoutY="344.0" mnemonicParsing="false" onAction="#ShowMsg" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Messagerie" textFill="WHITE" wrapText="true">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgMessage" />
+               </styleClass>
+            </Button>
+            <Button fx:id="traiter_reservation" layoutY="299.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Traiter Reservation" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgStade" />
+               </styleClass>
+            </Button>
+            <Button fx:id="menuCompetition" layoutY="389.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Gerer Compte" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="menuBoutons" />
+                  <String fx:value="bgCup" />
+               </styleClass>
+            </Button>
+            <Button fx:id="menuClub1" layoutY="254.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="List Reservation" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="bgClub" />
+                  <String fx:value="menuBoutons" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@mainSheet.css" />
+      <URL value="@../../bemyguset/resource/mainSheet.css" />
+   </stylesheets>
+</AnchorPane>

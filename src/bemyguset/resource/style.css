@@ -1,0 +1,269 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+/* 
+    Created on : 12 févr. 2017, 20:31:44
+    Author     : Haroun
+*/
+
+#btn_admin{
+
+    -fx-background-color:#3f89ff; 
+}
+#btn_admin:hover{
+    -fx-font-weight: bolder; 
+    -fx-background-color:#82b1ff;  
+}
+/*#btn_admin:focused{
+    -fx-background-color: #e8f0ff;
+    -fx-font-weight: bolder; 
+ 
+}*/
+
+
+
+#imageViewPane{
+
+    -fx-background-radius:50;
+
+}
+
+
+
+#btn_usr{
+
+    -fx-background-color:#3f89ff; 
+}
+/*#btn_usr:focused{
+    fx-background-color: #e8f0ff;
+    -fx-font-weight: bolder; 
+   
+}*/
+#btn_usr:hover{
+    -fx-font-weight: bolder; 
+    -fx-background-color:#82b1ff;  
+}
+#btn_rec{
+
+    -fx-background-color:#3f89ff; 
+}
+#btn_rec:hover{
+    -fx-font-weight: bolder; 
+    -fx-background-color:#82b1ff; 
+}
+/*#btn_rec:focused{
+ fx-background-color: #e8f0ff;
+    -fx-font-weight: bolder; 
+    
+}*/
+#btn_stat{
+
+    -fx-background-color:#3f89ff; 
+}
+#btn_stat:hover{
+    -fx-font-weight: bolder; 
+    -fx-background-color:#82b1ff; 
+}
+#home_btn{
+    -fx-background-color:#ed1e3d; 
+    
+}
+#home_btn:hover{
+    -fx-font-weight: bolder; 
+    -fx-background-color:#ff5972; 
+    
+}
+/*#btn_stat:focused{
+    fx-background-color: #e8f0ff;
+    -fx-font-weight: bolder; 
+    
+}*/
+
+
+#text_id{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+#paneLogin{
+    -fx-background-image: url("/src/br.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 100% 100%;
+    -fx-position: fixed; 
+    -fx-top: 100; 
+    -fx-left: 100; 
+    -fx-min-width: 50%;
+    -fx-min-height: 50%;
+    -fx-background-position: center center;
+
+}
+#paneOfLogin{
+    
+/*    -fx-background-raduis: 20;
+        -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+
+}
+#paneInscription{
+    -fx-background-image: url("/src/br.png");
+
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 100% 100%;
+    -fx-position: fixed; 
+    -fx-top: 100; 
+    -fx-left: 100; 
+    -fx-min-width: 50%;
+    -fx-min-height: 50%;
+    -fx-background-position: center center;
+
+}
+
+#btn_connect{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-size:large;
+    -fx-background-color: #0094ff;
+    -fx-background-radius:20; 
+}
+
+#btn_connect:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-font-size:large;
+    -fx-background-color: #44b1ff
+        ;
+    -fx-background-radius:20; 
+}
+
+#btn_inscription{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-size:large;
+    -fx-background-color: #0094ff;
+    -fx-background-radius:20; 
+
+}
+#btn_inscription:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-background-color: #44b1ff;
+    -fx-font-size:large;
+
+    -fx-background-radius:20; 
+}
+
+#btnSignIn{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-size:large;
+    -fx-background-color: #0094ff;
+    -fx-background-radius:10;   
+
+}
+#btnSignIn:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-background-color: #44b1ff;
+    -fx-background-radius:10;   
+    -fx-font-size:large;
+}
+#backBtn{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-size:large;
+    -fx-background-color: #0094ff;
+    -fx-background-radius:10;     
+
+}
+#backBtn:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-background-color: #44b1ff;
+    -fx-background-radius:00;     
+    -fx-font-size:large;
+}
+#btn_addAmin{
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-size:large;
+    -fx-background-color: #0094ff;
+    -fx-background-radius:20;  
+}
+#btn_addAmin:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-background-color: #44b1ff;
+    -fx-background-radius:20;     
+    -fx-font-size:large;
+}
+#btn_addAmin1{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-size:large;
+    -fx-background-color: #0094ff;
+    -fx-background-radius:20;  
+    
+}
+#btn_addAmin1:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-background-color: #44b1ff;
+    -fx-background-radius:20;     
+    -fx-font-size:large;
+}
+
+#btn_clear{
+     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-size:large;
+    -fx-background-color: #0094ff;
+    -fx-background-radius:20;     
+}
+#btn_clear:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-background-color: #44b1ff;
+    -fx-background-radius:20;     
+    -fx-font-size:large;
+}
+#btn_editAdmin{
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-size:large;
+    -fx-background-color: #0094ff;
+    -fx-background-radius:20;  
+}
+#btn_editAdmin:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-background-color: #44b1ff;
+    -fx-background-radius:20;     
+    -fx-font-size:large;
+}
+#btn_deleteAdmin{
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-size:large;
+    -fx-background-color: #0094ff;
+    -fx-background-radius:20;  
+}
+#btn_deleteAdmin:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bolder;
+    -fx-background-color: #44b1ff;
+    -fx-background-radius:20;     
+    -fx-font-size:large;
+}
+
+#anchLogin{
+
+    -fx-background-color: blue;
+}
+#vbox_id{
+
+    -fx-background-image: url("/src/br.png");
+
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 100% 100%;
+    -fx-position: fixed; 
+    -fx-top: 100; 
+    -fx-left: 100; 
+    -fx-min-width: 50%;
+    -fx-min-height: 50%;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}

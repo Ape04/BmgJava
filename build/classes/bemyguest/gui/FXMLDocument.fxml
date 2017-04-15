@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.FXMLDocumentController">
+   <children>
+      <SplitPane dividerPositions="0.1793275217932752" layoutX="24.0" layoutY="69.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: linear-gradient( #ccdfff,white);">
+               <children>
+                  <VBox fx:id="logo_id" layoutX="3.0" layoutY="1.0" prefHeight="575.0" prefWidth="197.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <JFXButton fx:id="btn_admin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#GestionAdminEvent" prefHeight="43.0" prefWidth="120.0" text="Gestion d'administrateur" textFill="WHITE" />
+                        <JFXButton fx:id="btn_usr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#GestionUserEvent" prefHeight="43.0" prefWidth="124.0" text="Gestion d'utilisateur" textFill="WHITE" />
+                        <JFXButton fx:id="btn_rec" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#SupprimerEvent" prefHeight="43.0" prefWidth="123.0" text="Gestion de reclamation" textFill="WHITE" />
+                        <JFXButton fx:id="btn_stat" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#ShowStat" prefHeight="43.0" prefWidth="123.0" text="Statistique" textFill="WHITE" />
+                        <JFXButton fx:id="home_btn" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#GoHome" prefHeight="43.0" prefWidth="123.0" text="Déconnecter" textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane prefHeight="497.0" prefWidth="581.0">
+               <children>
+                  <VBox fx:id="vbox_id" layoutX="14.0" layoutY="14.0" prefHeight="497.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
