@@ -5,6 +5,7 @@
  */
 package bemyguest.DAO.Classe;
 
+import static bemyguest.DAO.Classe.UserDAO.j;
 import bemyguest.DAO.Interface.IFavorisDAO;
 import bemyguest.config.ConnectionDB;
 import bemyguest.entities.Favoris;
@@ -49,7 +50,7 @@ public class FavorisDAO implements IFavorisDAO {
         try {
             String requete = "INSERT INTO favoris (id_user, id_favoris, alias) VALUES(?,?,null)";
             PreparedStatement pst = connexion.prepareStatement(requete);
-            pst.setInt(1, 1);
+            pst.setInt(1, j);
             pst.setInt(2, u.getId_u());
             pst.executeUpdate();
             System.out.println("Favoris Ajoutee");
@@ -102,8 +103,6 @@ public class FavorisDAO implements IFavorisDAO {
             User user = new User();
             User userFavoris = new User();
             UserDAO dao = new UserDAO();
-            //User u = new User(1, "draoui", "youssef", "yd@esprit.tn", "ape", "ape");
-            //User uF = new User(2, "gazzeh", "haroun", "hg@esprit.tn", "h", "g");
 
             Favoris favoris = null;
 
@@ -135,8 +134,6 @@ public class FavorisDAO implements IFavorisDAO {
             PreparedStatement pst = connexion.prepareStatement(requete);
             pst.setInt(1, id_u);
             ResultSet resultat = pst.executeQuery();
-            //Utilisateur u = new Utilisateur(1, "draoui", "youssef", "yd@esprit.tn", "ape", "ape");
-            //Utilisateur uF = new Utilisateur(2, "gazzeh", "haroun", "hg@esprit.tn", "h", "g");
           
             while (resultat.next()) {
                 User user = new User ();

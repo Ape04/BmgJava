@@ -8,6 +8,7 @@ package bemyguest.controller;
 import bemyguest.DAO.Classe.FavorisDAO;
 import bemyguest.DAO.Classe.MessageDAO;
 import bemyguest.DAO.Classe.UserDAO;
+import static bemyguest.DAO.Classe.UserDAO.j;
 import bemyguest.entities.Favoris;
 import bemyguest.entities.Message;
 import bemyguest.entities.UserCfg;
@@ -40,7 +41,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -82,6 +82,7 @@ public class DiscussionFXMLController implements Initializable {
     @FXML
     private VBox VboxDisc;
 
+    UserDAO uDao = new UserDAO();
     /**
      * Initializes the controller class.
      */
@@ -97,7 +98,7 @@ public class DiscussionFXMLController implements Initializable {
         List<Favoris> lst = new ArrayList();
         FavorisDAO dao = new FavorisDAO();
 
-        lst = dao.retrieveFavorisByIdUser(1);
+        lst = dao.retrieveFavorisByIdUser(j);
         for (int i = 0; i < lst.size(); i++) {
             data.add(new UserCfg(lst.get(i).getId_f(), lst.get(i).getUserFavoris().getNom(), lst.get(i).getUserFavoris().getPrenom(), lst.get(i).getUserFavoris().getId_u(), lst.get(i).getAlias()));
         }
@@ -126,7 +127,7 @@ public class DiscussionFXMLController implements Initializable {
                 @Override
                 public void run() {
                     Platform.runLater(() -> {
-                        lst = dao.retrieveMessageByEmetRecep(1, i);
+                        lst = dao.retrieveMessageByEmetRecep(j, i);
                         loadMsg();
                     });
                 }
@@ -153,8 +154,8 @@ public class DiscussionFXMLController implements Initializable {
             msg = message.getText();
             if (!"".equals(msg)) {
                 Message m = new Message();
-                m.setContenu("Youssef : "+ msg);
-                m.setUserEmetteur(uDAO.retrieveAdminById(1));
+                m.setContenu(uDAO.retrieveAdminById(j).getNom()+" "+uDAO.retrieveAdminById(j).getPrenom()+" : "+msg);
+                m.setUserEmetteur(uDAO.retrieveAdminById(j));
                 m.setUserRecepteur(uDAO.retrieveAdminById(i));
                 m.setDate(Date.valueOf(LocalDate.now()));
                 mDAO.insertMsg(m);
@@ -237,16 +238,14 @@ public class DiscussionFXMLController implements Initializable {
                 alert.setHeaderText("Voulez-vous supprimer votre conversation ?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
-                    mDao.deleteMsgByIDu(1,i);
-                    mDao.deleteMsgByIDu(i,1);
+                    mDao.deleteMsgByIDu(j,i);
+                    mDao.deleteMsgByIDu(i,j);
                     tableView.getItems().clear();
                     loadFavoris();
                 }
             }
         }
         );
-        
-        
         tableView.setContextMenu(contextMenu);
     }
 }

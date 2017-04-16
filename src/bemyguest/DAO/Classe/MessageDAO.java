@@ -20,14 +20,14 @@ public class MessageDAO implements IMessageDAO<Message>{
 
     @Override
     public void insertMsg(Message msg) {
-        String req="INSERT INTO message (contenu,id_e,id_r,date) VALUES(?,?,?,?)";
+        String req="INSERT INTO belousovr_messages (author_id,addressee_id,messageText) VALUES(?,?,?)";
 
         try {
            PreparedStatement pst=connexion.prepareStatement(req);
-           pst.setString(1,msg.getContenu());
-           pst.setInt(2,msg.getUserEmetteur().getId_u());
-           pst.setInt(3,msg.getUserRecepteur().getId_u());
-           pst.setDate(4, Date.valueOf(LocalDate.now()));
+           
+           pst.setInt(1,msg.getUserEmetteur().getId_u());
+           pst.setInt(2,msg.getUserRecepteur().getId_u());
+           pst.setString(3,msg.getContenu());
            pst.executeUpdate();
            System.out.println("Insertion avec sucçes");
         } catch (SQLException ex) {
@@ -41,7 +41,7 @@ public class MessageDAO implements IMessageDAO<Message>{
 
     @Override
     public void deleteMsg(int id_m) {
-         String req="delete  from  message where id_m="+id_m; 
+         String req="delete  from  belousovr_messages where id="+id_m; 
         try
         {
            PreparedStatement pst =connexion.prepareStatement(req);
@@ -54,7 +54,7 @@ public class MessageDAO implements IMessageDAO<Message>{
     
         @Override
     public void deleteMsgByIDu(int id_e, int id_r) {
-         String req="delete  from  message where id_e="+id_e+" and id_r="+id_r; 
+         String req="delete  from  belousovr_messages where author_id="+id_e+" and addressee_id="+id_r; 
         try
         {
            PreparedStatement pst =connexion.prepareStatement(req);
@@ -74,7 +74,7 @@ public class MessageDAO implements IMessageDAO<Message>{
     @Override
     public List<Message> retrieveMessageByEmetteur(int emetteur) {
         List<Message> listeMsg = new ArrayList<>();
-        String req="Select * from message WHERE (id_e="+emetteur+")";
+        String req="Select * from belousovr_messages WHERE (author_id="+emetteur+")";
         try {
         Statement statement=connexion.createStatement();
          ResultSet resultat=statement.executeQuery(req);
@@ -109,7 +109,7 @@ public class MessageDAO implements IMessageDAO<Message>{
     @Override
     public List<Message> retrieveMessageByRecepteur(int rec) {
         List<Message> listeMsgs = new ArrayList<>();
-        String req="Select * from message WHERE (id_r="+rec+")";
+        String req="Select * from belousovr_messages WHERE (addressee_id="+rec+")";
         try {
         Statement statement=connexion.createStatement();
          ResultSet resultat=statement.executeQuery(req);
@@ -143,7 +143,7 @@ public class MessageDAO implements IMessageDAO<Message>{
     public List<Message> retrieveMessageByEmetRecep(int emet, int recep) {
         List<Message> listeMsgs = new ArrayList<>();
         //String req="Select * from message WHERE (id_e="+emet+" and id_r="+recep+")";
-        String req = " Select * from message where id_e in ("+emet+","+recep+")"+"and id_r in ("+emet+","+recep+")";
+        String req = " Select * from belousovr_messages where author_id in ("+emet+","+recep+")"+"and addressee_id in ("+emet+","+recep+")";
         try {
         Statement statement=connexion.createStatement();
          ResultSet resultat=statement.executeQuery(req);
@@ -153,16 +153,14 @@ public class MessageDAO implements IMessageDAO<Message>{
              User uRecepteur;
              UserDAO dao = new UserDAO();
              
-                    Date date=resultat.getDate(5);
                     uEmetteur = dao.retrieveAdminById(emet);
                     uRecepteur = dao.retrieveAdminById(recep);
                     
                     Message msg=new Message();
                     msg.setId_m(resultat.getInt(1));
-                    msg.setContenu(resultat.getString(2));
+                    msg.setContenu(resultat.getString(4));
                     msg.setUserEmetteur(uEmetteur);
                     msg.setUserRecepteur(uRecepteur);
-                    msg.setDate(date);
                     listeMsgs.add(msg);
                 }
          return listeMsgs;
@@ -176,12 +174,12 @@ public class MessageDAO implements IMessageDAO<Message>{
         {
         UserDAO ud=new UserDAO();
         MessageDAO msgDao=new MessageDAO();
-        
-        Message msg = new Message("tt", ud.retrieveAdminById(1), ud.retrieveAdminById(2), null);
+        User u1 = new User(1, "y", "y", "y", "y", "y");
+        User u2 = new User(2, "h", "h", "h", "h", "h");
+        Message msg = new Message(u1, u2,"tt");
         //msgDao.insertMsg(msg);
         //msgDao.deletChat(18);
-        System.out.println(msgDao.retrieveMessageByEmetRecep(5, 1));
+        msgDao.insertMsg(msg);
         
         }
-    
 }

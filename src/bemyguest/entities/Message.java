@@ -14,6 +14,7 @@ public class Message {
     private User userEmetteur;
     private  User userRecepteur;
     private Date date;
+    private int reading;
     
     public Message() {
     }
@@ -24,6 +25,20 @@ public class Message {
         this.userEmetteur = userEmetteur;
         this.userRecepteur = userRecepteur;
         this.date = date;
+    }
+    
+    public Message(int id_m, String contenu, User userEmetteur, User userRecepteur, int reading) {
+        this.id_m = id_m;
+        this.contenu = contenu;
+        this.userEmetteur = userEmetteur;
+        this.userRecepteur = userRecepteur;
+        this.reading = reading;
+    }
+    
+    public Message( User userEmetteur, User userRecepteur, String contenu) {
+        this.contenu = contenu;
+        this.userEmetteur = userEmetteur;
+        this.userRecepteur = userRecepteur;
     }
     
     public Message(String contenu, User userEmetteur, User userRecepteur, Date date) {
@@ -48,6 +63,15 @@ public class Message {
         this.id_m = id_m;
     }
 
+    public int getReading() {
+        return reading;
+    }
+
+    public void setReading(int reading) {
+        this.reading = reading;
+    }
+
+    
     public String getContenu() {
         return contenu;
     }
