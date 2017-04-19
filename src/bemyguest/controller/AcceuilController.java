@@ -96,6 +96,8 @@ public class AcceuilController implements Initializable {
     
         @FXML
     private AnchorPane acc;
+        @FXML
+    private Button gestionProp;
     
 
     boolean req = false;
@@ -119,6 +121,11 @@ public class AcceuilController implements Initializable {
     private void ShowAcc() throws IOException  {
        
                 acc.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/AcceuilFXML.fxml")));
+    }
+       @FXML
+    private void GestionProp() throws IOException  {
+       
+                afficher.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/AfficherPropriete.fxml")));
     }
     
     @FXML

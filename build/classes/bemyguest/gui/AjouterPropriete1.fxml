@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.validation.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
+
+<AnchorPane id="AnchorPane" fx:id="an1" prefHeight="575.0" prefWidth="750.0" style="-fx-background-color: #dedede;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.AjouterPropriete1Controller">
+   <children>
+      <JFXComboBox fx:id="combo" layoutX="63.0" layoutY="109.0" prefHeight="35.0" prefWidth="239.0" style="-fx-background-color: #FFFFFF;" />
+      <Label layoutX="31.0" layoutY="72.0" text="Quel genre d'habitation proposez-vous ?">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="175.0" text="Quel type de logement auront les voyageurs ?">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="combo1" layoutX="69.0" layoutY="217.0" prefHeight="35.0" prefWidth="239.0" style="-fx-background-color: #FFFFFF;" />
+      <JFXButton id="btnSuivant" fx:id="btn" buttonType="RAISED" layoutX="542.0" layoutY="514.0" onAction="#suivant" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: linear-gradient(#54beef, #2ea1d7);" text="Suivant" textFill="#f8f8f8" />
+      <Label layoutX="36.0" layoutY="283.0" text="Nombre de voyageur">
+         <font>
+            <Font name="Times New Roman" size="17.0" />
+         </font>
+      </Label>
+      <Spinner fx:id="spinner" layoutX="68.0" layoutY="320.0" prefHeight="34.0" prefWidth="239.0" />
+      <Pane layoutX="431.0" layoutY="127.0" prefHeight="370.0" prefWidth="291.0" style="-fx-border-color: #C0C0C0; -fx-background-color: #FFFFFF; -fx-border-radius: 5;">
+         <children>
+            <Label layoutX="8.0" layoutY="65.0" prefHeight="76.0" prefWidth="274.0" text="Logement entier :Les voyageurs &#10;loueront le logement entier. &#10;Logements accessoires y compris." textFill="#9e3131">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label layoutX="9.0" layoutY="157.0" prefHeight="94.0" prefWidth="274.0" text="Chambre privée:Les voyageurs &#10;ont leur propre chambre privée &#10;pour dormir." textFill="#9e3a3a">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <ImageView fitHeight="51.0" fitWidth="57.0" layoutX="101.0" layoutY="6.0">
+               <image>
+                  <Image url="file:/C:/Users/Daly/Desktop/lampe.PNG" />
+               </image>
+            </ImageView>
+            <Label layoutX="11.0" layoutY="279.0" text="Chambre partagée: Les voyageurs&#10; n'ont pas de chambre privée." textFill="#9a2121">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane prefHeight="51.0" prefWidth="750.0" style="-fx-background-color: #26778f;;">
+         <children>
+            <Label layoutX="7.0" layoutY="6.0" text="De quel type de logement s'agit-il ?" textFill="#f8f8f8">
+               <font>
+                  <Font name="Felix Titling" size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="36.0" layoutY="374.0" prefHeight="20.0" prefWidth="177.0" text="Nombre de chambre">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="comboNbrChambre" layoutX="68.0" layoutY="414.0" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #FFFFFF;" />
+      <JFXButton buttonType="RAISED" layoutX="570.0" layoutY="60.0" onAction="#accueil" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #F08080;" text="Accueil" textFill="WHITE" />
+      <Label layoutX="36.0" layoutY="465.0" prefHeight="20.0" prefWidth="42.0" text="Prix">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="prix" layoutX="69.0" layoutY="505.0" maxWidth="239.0" minWidth="100.0" prefHeight="35.0" prefWidth="239.0" promptText="En dinar tunisien" style="-fx-background-color: #FFFFFf;" />
+      <Label fx:id="lblPrix" layoutX="72.0" layoutY="549.0" prefHeight="17.0" prefWidth="177.0" text="Veuillez saisir le prix" textFill="RED" visible="false" />
+      <Label fx:id="lblPrix2" layoutX="322.0" layoutY="523.0" text="Le prix doit étre un entier" textFill="RED" visible="false" />
+      
+   </children>
+</AnchorPane>

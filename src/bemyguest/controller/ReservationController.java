@@ -311,7 +311,7 @@ int idUserConnecte=1;
 
  for (int i=0 ; i<l2.size();i++){
          
-           data1.add(new Propriete(l2.get(i).getVille(),l2.get(i).getRue(),l2.get(i).getId()));
+           data1.add(new Propriete(l2.get(i).getVille(),l2.get(i).getRue(),l2.get(i).getUser())); //kenet getUtilisateur radithha getUser 5ater ena fel entité propriete msamih User not utilisateur
          
        }
 

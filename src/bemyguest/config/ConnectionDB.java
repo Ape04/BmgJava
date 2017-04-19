@@ -16,7 +16,7 @@ public class ConnectionDB {
     static public Connection connection;
  String url = "jdbc:mysql://localhost:3306/pitest";
             String user = "root";
-            String pwd = "";
+            String pwd = "root";
             
     
     public ConnectionDB() {

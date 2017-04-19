@@ -9,15 +9,15 @@ package bemyguest.entities;
  *
  * @author Daly
  */
-public class Image {
+public class ImageProp {
     private int id;
     private String url;
     Propriete propriete;
 
-    public Image() {
+    public ImageProp() {
     }
 
-    public Image(int id, String url, Propriete propriete) {
+    public ImageProp(int id, String url, Propriete propriete) {
         this.id = id;
         this.url = url;
         this.propriete = propriete;

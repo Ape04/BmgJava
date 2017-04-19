@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="afficherMesagerie" prefHeight="547.0" prefWidth="1159.0" styleClass="corpsPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.AfficherProprieteController">
+   <children>
+      <TableView fx:id="proprieteList" editable="true" onMouseClicked="#ShowOnClick" prefHeight="383.0" prefWidth="1134.0" style="-fx-background-color: #FFFFFF;">
+         <columns>
+            <TableColumn fx:id="categorie" prefWidth="94.0" text="Categorie" />
+            <TableColumn fx:id="type" prefWidth="56.0" text="Type" />
+            <TableColumn fx:id="ville" prefWidth="78.0" text="Gouvernorat" />
+            <TableColumn fx:id="rue" prefWidth="82.0" text="Rue" />
+            <TableColumn fx:id="prix" prefWidth="52.0" text="Prix" />
+            <TableColumn fx:id="nbrVoyageur" prefWidth="111.0" text="Nombre Voyageur" />
+            <TableColumn fx:id="nbrChambre" prefWidth="107.0" text="Nombre Chambre" />
+            <TableColumn fx:id="description" prefWidth="186.0" text="Description" />
+            <TableColumn fx:id="animaux" prefWidth="59.0" text="Animaux" />
+            <TableColumn fx:id="fumeur" prefWidth="52.0" text="Fumeur" />
+            <TableColumn fx:id="enfant" minWidth="0.0" prefWidth="46.0" text="enfant" />
+            <TableColumn fx:id="alcool" prefWidth="39.0" text="alcool" />
+            <TableColumn fx:id="titre" prefWidth="169.0" text="titre" />
+         </columns>
+      </TableView>
+      <JFXButton buttonType="RAISED" layoutX="665.0" layoutY="436.0" onAction="#Supprimer" prefHeight="39.0" prefWidth="113.0" style="-fx-background-color: #DC143C;" text="Supprimer" textFill="#f2f2f2" />
+      <JFXButton buttonType="RAISED" layoutX="467.0" layoutY="436.0" onAction="#Update" prefHeight="39.0" prefWidth="113.0" style="-fx-background-color: linear-gradient(#54beef, #2ea1d7);" text="Update" textFill="#eeeeee" />
+      <JFXButton buttonType="RAISED" layoutX="147.0" layoutY="436.0" onAction="#Ajouter" prefHeight="39.0" prefWidth="113.0" style="-fx-background-color: linear-gradient(#54beef, #2ea1d7);" text="Ajouter" textFill="#eeeeee" />
+   </children>
+</AnchorPane>

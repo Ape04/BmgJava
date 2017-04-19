@@ -18,7 +18,8 @@ public class HistoriquePropriete {
     private String pays;
     private String ville;
     private String rue;
-    private float prix;
+        private String titre;
+    private int prix;
     private int nbrChambre;
     private int nbrVoyageur;    
     private String description;
@@ -28,13 +29,14 @@ public class HistoriquePropriete {
     private Boolean enfant;
     private User user;
 
-    public HistoriquePropriete(int id, String categoriePropriete, String typePropriete, String pays, String ville, String rue, float prix, int nbrChambre, int nbrVoyageur, String description, Boolean fumeur, Boolean alcool, Boolean enfant, User user) {
+    public HistoriquePropriete(int id, String categoriePropriete, String typePropriete, String pays, String ville, String rue, int prix, int nbrChambre, int nbrVoyageur, String description, Boolean fumeur, Boolean alcool, Boolean enfant, User user,String titre) {
         this.id = id;
         this.categoriePropriete = categoriePropriete;
         this.typePropriete = typePropriete;
         this.pays = pays;
         this.ville = ville;
         this.rue = rue;
+        this.titre = titre;
         this.prix = prix;
         this.nbrChambre = nbrChambre;
         this.nbrVoyageur = nbrVoyageur;
@@ -45,11 +47,41 @@ public class HistoriquePropriete {
         this.user = user;
     }
 
+    public HistoriquePropriete(int id, String categoriePropriete, String typePropriete, String ville, String rue, String titre, int prix, int nbrChambre, int nbrVoyageur, String description, Boolean animaux, Boolean fumeur, Boolean alcool, Boolean enfant) {
+        this.id = id;
+        this.categoriePropriete = categoriePropriete;
+        this.typePropriete = typePropriete;
+        this.ville = ville;
+        this.rue = rue;
+        this.titre = titre;
+        this.prix = prix;
+        this.nbrChambre = nbrChambre;
+        this.nbrVoyageur = nbrVoyageur;
+        this.description = description;
+        this.animaux = animaux;
+        this.fumeur = fumeur;
+        this.alcool = alcool;
+        this.enfant = enfant;
+    }
+    
+
     public HistoriquePropriete() {
     }
 
+   
+
+    
+
     public int getId() {
         return id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public void setId(int id) {
@@ -96,11 +128,11 @@ public class HistoriquePropriete {
         this.rue = rue;
     }
 
-    public float getPrix() {
+    public int getPrix() {
         return prix;
     }
 
-    public void setPrix(float prix) {
+    public void setPrix(int prix) {
         this.prix = prix;
     }
 

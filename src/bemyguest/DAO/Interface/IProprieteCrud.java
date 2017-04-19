@@ -16,10 +16,12 @@ import java.util.List;
  * @author Daly
  */
 public interface IProprieteCrud {
-    public boolean addPropriete(Propriete p,HistoriquePropriete historiquePropriete);
-    public boolean updatePropriete(Propriete p,HistoriquePropriete historiquePropriete);
+    public boolean addPropriete(Propriete p,HistoriquePropriete hprop);
+    public boolean updatePropriete(Propriete p/*,HistoriquePropriete hprop*/);
     public boolean deletePropriete(int id);
+   
     public List<Propriete> getAllProprietes();
+    public List<Propriete> getAllUserProprietes(int id_u);
     public List<HistoriquePropriete> getAllHistoriqueProprietes();
     public Propriete getProprieteById(int id);
     public HistoriquePropriete getHistoriqueProprieteById(int id);

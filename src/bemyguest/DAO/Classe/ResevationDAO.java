@@ -658,7 +658,7 @@ return false ;
                 prop.setPays(res.getString("Pays"));
                 prop.setVille(res.getString("Ville"));
                 prop.setRue(res.getString("Rue"));
-                prop.setPrix(res.getFloat("Prix"));
+                prop.setPrix(res.getInt("Prix"));
                 prop.setNbrChambre(res.getInt("NbrChambre"));
                 prop.setNbrVoyageur(res.getInt("NbrVoyageur"));
                 prop.setDescription(res.getString("Description"));
@@ -669,7 +669,7 @@ return false ;
                 User user = new User();
               
              user = dao.retrieveAdminById(res.getInt("id_u"));
-               prop.setUtilisateur(user); 
+               prop.setUser(user); 
                              
         ListPropriete.add(prop);
         
