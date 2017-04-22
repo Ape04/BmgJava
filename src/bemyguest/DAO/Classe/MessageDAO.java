@@ -20,7 +20,7 @@ public class MessageDAO implements IMessageDAO<Message>{
 
     @Override
     public void insertMsg(Message msg) {
-        String req="INSERT INTO belousovr_messages (author_id,addressee_id,messageText) VALUES(?,?,?)";
+        String req="INSERT INTO belousovr_messages (author_id,addressee_id,messageText,reading) VALUES(?,?,?,?)";
 
         try {
            PreparedStatement pst=connexion.prepareStatement(req);
@@ -28,6 +28,7 @@ public class MessageDAO implements IMessageDAO<Message>{
            pst.setInt(1,msg.getUserEmetteur().getId_u());
            pst.setInt(2,msg.getUserRecepteur().getId_u());
            pst.setString(3,msg.getContenu());
+           pst.setInt(4,1);
            pst.executeUpdate();
            System.out.println("Insertion avec sucçes");
         } catch (SQLException ex) {
