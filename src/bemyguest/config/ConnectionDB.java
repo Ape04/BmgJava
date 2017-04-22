@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class ConnectionDB {
     static public Connection connection;
- String url = "jdbc:mysql://localhost:3306/pitest";
+ String url = "jdbc:mysql://localhost:3306/sprintweb";
             String user = "root";
             String pwd = "";
             

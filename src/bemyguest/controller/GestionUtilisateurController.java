@@ -115,7 +115,7 @@ Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 LoadData();
             } else {
                 data.clear();
-                String sql = "SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' and id_u LIKE '%" + txt_search2.getText() + "%'"
+                String sql = "SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' and id LIKE '%" + txt_search2.getText() + "%'"
                         + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' and lastname LIKE '%" + txt_search2.getText() + "%'"
                         + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' and firstname LIKE '%" + txt_search2.getText() + "%'"
                         + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' and email LIKE '%" + txt_search2.getText() + "%'"
@@ -160,7 +160,7 @@ Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             ResultSet rs = connexion.createStatement().executeQuery("SELECT * FROM utilisateur where roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' ");
             while (rs.next())
             {
-                data.add(new User(rs.getInt("id_u"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("login"), rs.getString("password"), null, rs.getString("imageurl"), rs.getString("sexe"), rs.getString("daten"), rs.getString("numtel")));                
+                data.add(new User(rs.getInt("id"), rs.getString("lastname"), rs.getString("firstname"), rs.getString("email"), rs.getString("username"), rs.getString("password"), null, rs.getString("imageurl"), rs.getString("sexe"), rs.getString("daten"), rs.getString("numtel")));                
             }
         } catch (SQLException ex) {
             System.err.println("ERROR" + ex);

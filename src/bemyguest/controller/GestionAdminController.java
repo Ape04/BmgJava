@@ -365,7 +365,7 @@ public class GestionAdminController implements Initializable {
                 LoadData();
             } else {
                 data.clear();
-                                                                                                                                        String sql = "SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and id_u LIKE '%" + txt_search2.getText() + "%'"
+                                                                                                                                        String sql = "SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and id LIKE '%" + txt_search2.getText() + "%'"
                                                                                                                                                 + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and lastname LIKE '%" + txt_search2.getText() + "%'"
                                                                                                                                                 + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and firstname LIKE '%" + txt_search2.getText() + "%'"
                                                                                                                                                 + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and email LIKE '%" + txt_search2.getText() + "%'"

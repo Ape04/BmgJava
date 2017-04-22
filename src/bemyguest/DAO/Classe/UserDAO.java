@@ -41,7 +41,7 @@ public class UserDAO implements IUser {
 
     public void updateLastLogin(User user, int i) {
         try {
-            String requete = "Update `utilisateur` set `last_login`=? where `id_u`="+i ;
+            String requete = "Update `utilisateur` set `last_login`=? where `id`="+i ;
             PreparedStatement prt = connexion.prepareStatement(requete);
             prt.setString(1, Time());
             prt.executeUpdate();
@@ -139,7 +139,7 @@ public class UserDAO implements IUser {
     public boolean deleteUser(int id_u) {
 
         boolean testDelete = false;
-        String req = "delete from utilisateur where id_u=?";
+        String req = "delete from utilisateur where id=?";
 
         try {
             PreparedStatement prt = connexion.prepareStatement(req);
@@ -173,7 +173,7 @@ public class UserDAO implements IUser {
             
             
             while (res.next()) {
-                user = new User(res.getInt("id_u"),
+                user = new User(res.getInt("id"),
                         res.getString("lastname"),
                         res.getString("firstname"), res.getString("email"), res.getString("username"),
                         res.getString("password"), res.getString("roles"), res.getString("imageurl"),res.getString("sexe")
@@ -195,7 +195,7 @@ public class UserDAO implements IUser {
     public boolean updateUser(User user) {
         
         boolean testUpdate =false;
-        String sql="update utilisateur set lastname=?,firstname=?,email=?, username=?, password=?, sexe=?, imageurl=?, numtel=? where id_u="+user.getId_u();
+        String sql="update utilisateur set lastname=?,firstname=?,email=?, username=?, password=?, sexe=?, imageurl=?, numtel=? where id="+user.getId_u();
 
         try {
                 PreparedStatement prt=connexion.prepareStatement(sql);
@@ -226,7 +226,7 @@ public class UserDAO implements IUser {
 
     @Override
     public User retrieveAdminById(int id_u) {
-        String req = "select * from utilisateur where id_u = '" + id_u + "%'";
+        String req = "select * from utilisateur where id = '" + id_u + "%'";
      User user=null;
         try {
            
@@ -235,7 +235,7 @@ public class UserDAO implements IUser {
             ResultSet res = prt.executeQuery();
              
                 while (res.next()) {
-                    user = new User(res.getInt("id_u"), res.getString("lastname"), 
+                    user = new User(res.getInt("id"), res.getString("lastname"), 
                             res.getString("firstname"), res.getString("email"), 
                             res.getString("username"), res.getString("password"), 
                             res.getString("roles"),res.getString("imageurl"),
@@ -266,7 +266,7 @@ public class UserDAO implements IUser {
             ResultSet res = prt.executeQuery();
              
                 while (res.next()) {
-                    user = new User(res.getInt("id_u"), res.getString("lastname"), 
+                    user = new User(res.getInt("id"), res.getString("lastname"), 
                             res.getString("firstname"), res.getString("email"), 
                             res.getString("username"), res.getString("password"), 
                             res.getString("roles"),res.getString("imageurl"),
@@ -290,13 +290,13 @@ public class UserDAO implements IUser {
     @Override
     public int retrieveUserByLogin(String login) {
         
-        String req = "select id_u from utilisateur where username = '" + login + "' and (roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' or roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}')  ";
+        String req = "select id from utilisateur where username = '" + login + "' and (roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' or roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}')  ";
         try {
            
             PreparedStatement prt = connexion.prepareStatement(req);
             ResultSet res = prt.executeQuery();
              while(res.next()){
-            j=res.getInt("id_u");}
+            j=res.getInt("id");}
                         return j;
                      
             } catch (SQLException ex) {
