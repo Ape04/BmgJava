@@ -346,7 +346,7 @@ public class GestionAdminController implements Initializable {
         try {
             Connection connexion = ConnectionDB.getConnexion();
 
-            ResultSet rs = connexion.createStatement().executeQuery("SELECT * FROM utilisateur where role='Admin' ");
+            ResultSet rs = connexion.createStatement().executeQuery("SELECT * FROM utilisateur where roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' ");
             while (rs.next()) {
                 data.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), null, rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)));
 
@@ -365,11 +365,11 @@ public class GestionAdminController implements Initializable {
                 LoadData();
             } else {
                 data.clear();
-                                                                                                                                        String sql = "SELECT * FROM utilisateur WHERE role='admin' and id_u LIKE '%" + txt_search2.getText() + "%'"
-                                                                                                                                                + "UNION SELECT * FROM utilisateur WHERE role='admin' and nom LIKE '%" + txt_search2.getText() + "%'"
-                                                                                                                                                + "UNION SELECT * FROM utilisateur WHERE role='admin' and prenom LIKE '%" + txt_search2.getText() + "%'"
-                                                                                                                                                + "UNION SELECT * FROM utilisateur WHERE role='admin' and email LIKE '%" + txt_search2.getText() + "%'"
-                                                                                                                                                + "UNION SELECT * FROM utilisateur WHERE role='admin' and login LIKE '%" + txt_search2.getText() + "%'";
+                                                                                                                                        String sql = "SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and id_u LIKE '%" + txt_search2.getText() + "%'"
+                                                                                                                                                + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and lastname LIKE '%" + txt_search2.getText() + "%'"
+                                                                                                                                                + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and firstname LIKE '%" + txt_search2.getText() + "%'"
+                                                                                                                                                + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and email LIKE '%" + txt_search2.getText() + "%'"
+                                                                                                                                                + "UNION SELECT * FROM utilisateur WHERE roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' and username LIKE '%" + txt_search2.getText() + "%'";
                 try {
 
                     PreparedStatement prt = connexion.prepareStatement(sql);

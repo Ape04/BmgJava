@@ -14,6 +14,11 @@ import javafx.geometry.Pos;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import bemyguest.config.ConnectionDB;
+import java.util.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -23,22 +28,48 @@ public class UserDAO implements IUser {
 
     Connection connexion = ConnectionDB.getConnexion();
     public static int j;
+    public static String Time() {
 
+    java.util.Date dt = new java.util.Date();
+
+    java.text.SimpleDateFormat sdf = 
+     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    String currentTime = sdf.format(dt); 
+    return currentTime;
+}
+
+    public void updateLastLogin(User user, int i) {
+        try {
+            String requete = "Update `utilisateur` set `last_login`=? where `id_u`="+i ;
+            PreparedStatement prt = connexion.prepareStatement(requete);
+            prt.setString(1, Time());
+            prt.executeUpdate();
+        } catch (SQLException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+            }
+        
+    
     @Override
     public void inscriptionUser(User user) {
+       
         try {
-            String requete = "INSERT INTO `utilisateur` (`nom`, `prenom`, `email`, `login`, `password`,`role`, `imageurl`,`sexe`,`daten`,`numtel` ) VALUES (?, ?, ?, ?, ?,'guest',?,?,?,?)";
+            String requete = "INSERT INTO `utilisateur` (`lastname`, `firstname`, `email`, `email_canonical`,`username`,`username_canonical`,`enabled`, `password`,`roles`, `imageurl`,`sexe`,`daten`,`numtel`,`last_login` ) VALUES (?, ?, ?, ?, ?,?, '1', ?,'a:1:{i:0;s:11:\"ROLE_CLIENT\";}',?,?,?,?,?)";
             PreparedStatement prt = connexion.prepareStatement(requete);
             
             prt.setString(1, user.getNom());
             prt.setString(2, user.getPrenom());
             prt.setString(3, user.getEmail());
-            prt.setString(4, user.getLogin());
-            prt.setString(5, user.getPassword());
-            prt.setString(6, user.getImageurl());
-            prt.setString(7, user.getSexe());
-            prt.setString(8, user.getDaten());
-            prt.setString(9, user.getNumtel());
+            prt.setString(4, user.getEmail().toLowerCase());
+            prt.setString(5, user.getLogin());
+            prt.setString(6, user.getLogin().toLowerCase());
+            prt.setString(7, user.getPassword());
+            prt.setString(8, user.getImageurl());
+            prt.setString(9, user.getSexe());
+            prt.setString(10, user.getDaten());
+            prt.setString(11, user.getNumtel());
+            prt.setString(12, Time());
             
             prt.executeUpdate();
 
@@ -79,7 +110,7 @@ public class UserDAO implements IUser {
     @Override
     public void insertAdmin(User user) {
         try {
-            String requete = "INSERT INTO `utilisateur` (`nom`, `prenom`, `email`, `login`, `password`,`role`,`sexe`,`imageurl`,`numtel`) VALUES (?, ?, ?, ?, ?,'Admin',?,?,?)";
+            String requete = "INSERT INTO `utilisateur` (`lastname`, `firstname`, `email`, `username`, `password`,`roles`,`sexe`,`imageurl`,`numtel`) VALUES (?, ?, ?, ?, ?,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',?,?,?)";
             PreparedStatement prt = connexion.prepareStatement(requete);
             
             prt.setString(1, user.getNom());
@@ -143,9 +174,9 @@ public class UserDAO implements IUser {
             
             while (res.next()) {
                 user = new User(res.getInt("id_u"),
-                        res.getString("nom"),
-                        res.getString("prenom"), res.getString("email"), res.getString("login"),
-                        res.getString("password"), res.getString("role"), res.getString("imageurl"),res.getString("sexe")
+                        res.getString("lastname"),
+                        res.getString("firstname"), res.getString("email"), res.getString("username"),
+                        res.getString("password"), res.getString("roles"), res.getString("imageurl"),res.getString("sexe")
                 ,res.getString("daten"),res.getString("numtel"));
 
                 myUsers.add(user);
@@ -164,7 +195,7 @@ public class UserDAO implements IUser {
     public boolean updateUser(User user) {
         
         boolean testUpdate =false;
-        String sql="update utilisateur set nom=?,prenom=?,email=?, login=?, password=?, sexe=?, imageurl=?, numtel=? where id_u="+user.getId_u();
+        String sql="update utilisateur set lastname=?,firstname=?,email=?, username=?, password=?, sexe=?, imageurl=?, numtel=? where id_u="+user.getId_u();
 
         try {
                 PreparedStatement prt=connexion.prepareStatement(sql);
@@ -204,10 +235,10 @@ public class UserDAO implements IUser {
             ResultSet res = prt.executeQuery();
              
                 while (res.next()) {
-                    user = new User(res.getInt("id_u"), res.getString("nom"), 
-                            res.getString("prenom"), res.getString("email"), 
-                            res.getString("login"), res.getString("password"), 
-                            res.getString("role"),res.getString("imageurl"),
+                    user = new User(res.getInt("id_u"), res.getString("lastname"), 
+                            res.getString("firstname"), res.getString("email"), 
+                            res.getString("username"), res.getString("password"), 
+                            res.getString("roles"),res.getString("imageurl"),
                             res.getString("sexe"),res.getString("daten"),
                             res.getString("numtel")
                     );
@@ -226,7 +257,7 @@ public class UserDAO implements IUser {
     }
 @Override
     public User retrieveAdminByLogin(String login) {
-        String req = "select * from utilisateur where login = '" + login + "'  ";
+        String req = "select * from utilisateur where username = '" + login + "'  ";
      User user=null;
         try {
            
@@ -235,10 +266,10 @@ public class UserDAO implements IUser {
             ResultSet res = prt.executeQuery();
              
                 while (res.next()) {
-                    user = new User(res.getInt("id_u"), res.getString("nom"), 
-                            res.getString("prenom"), res.getString("email"), 
-                            res.getString("login"), res.getString("password"), 
-                            res.getString("role"),res.getString("imageurl"),
+                    user = new User(res.getInt("id_u"), res.getString("lastname"), 
+                            res.getString("firstname"), res.getString("email"), 
+                            res.getString("username"), res.getString("password"), 
+                            res.getString("roles"),res.getString("imageurl"),
                             res.getString("sexe"),res.getString("daten"),
                             res.getString("numtel")
                     );
@@ -259,11 +290,10 @@ public class UserDAO implements IUser {
     @Override
     public int retrieveUserByLogin(String login) {
         
-        String req = "select id_u from utilisateur where login = '" + login + "' and role='guest'  ";
+        String req = "select id_u from utilisateur where username = '" + login + "' and (roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' or roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}')  ";
         try {
            
             PreparedStatement prt = connexion.prepareStatement(req);
-
             ResultSet res = prt.executeQuery();
              while(res.next()){
             j=res.getInt("id_u");}
@@ -275,6 +305,10 @@ public class UserDAO implements IUser {
            
                         return 0;
             }
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(Time());
     }
 
 }

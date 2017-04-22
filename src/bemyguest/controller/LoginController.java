@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import bemyguest.config.ConnectionDB;
-
+import bemyguest.entities.User;
 /**
  * *****
  */
@@ -48,6 +48,7 @@ public class LoginController implements Initializable {
 
     ResultSet rs = null;
     PreparedStatement pst = null;
+    UserDAO dao=new UserDAO();
 
     @FXML
     void FacebookConnect(ActionEvent event) {
@@ -193,11 +194,16 @@ public class LoginController implements Initializable {
 
 //
 //            txt_nom.setText(txt_user2.toString());
-            String req = "SELECT * FROM utilisateur where login=? and password=? and role='Admin' ";
-
+            String req = "SELECT * FROM utilisateur where username=? and password=? and roles='a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}' ";
+            
             pst = connexion.prepareStatement(req);
             pst.setString(1, txt_user.getText());
             pst.setString(2, txt_passwd.getText());
+            j=dao.retrieveUserByLogin(txt_user.getText());
+            System.out.println(j);
+            User u = dao.retrieveAdminById(j);
+            dao.updateLastLogin(u,j);
+
 
             rs = pst.executeQuery();
             if (rs.next()) {
@@ -227,9 +233,11 @@ public class LoginController implements Initializable {
 
             } else {
 
-                String req2 = "SELECT * FROM utilisateur where login=? and password=? and role='guest' ";
-                UserDAO dao=new UserDAO();
+                String req2 = "SELECT * FROM utilisateur where username=? and password=? and roles='a:1:{i:0;s:11:\"ROLE_CLIENT\";}' ";
+                
                 j=dao.retrieveUserByLogin(txt_user.getText());
+                User u2 = dao.retrieveAdminById(j);
+                dao.updateLastLogin(u2,j);
 
                 pst = connexion.prepareStatement(req2);
                 pst.setString(1, txt_user.getText());
@@ -252,7 +260,9 @@ public class LoginController implements Initializable {
                         } catch (Exception e) {
                             System.out.println("Guest : " + e);
                         }
+                        
                     }
+                   
                 }
  /*Notifications notififcationBuilder = Notifications.create()
                         .title("Erreur !")
@@ -267,5 +277,6 @@ public class LoginController implements Initializable {
             }
 
         }
+        
     }
 }

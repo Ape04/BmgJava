@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Oussaa/Documents/NetBeansProjects/PiSquad@Esprit/src/Main/PiSquadEsprit.java</file>
-            <file>file:/C:/Users/Oussaa/Documents/NetBeansProjects/PiSquad@Esprit/src/bemyguest/controller/InscriptionController.java</file>
+            <file>file:/C:/Users/Oussaa/Documents/NetBeansProjects/PiSquad@Esprit/src/bemyguest/controller/GestionUtilisateurController.java</file>
+            <file>file:/C:/Users/Oussaa/Documents/NetBeansProjects/PiSquad@Esprit/src/bemyguest/controller/LoginController.java</file>
             <file>file:/C:/Users/Oussaa/Documents/NetBeansProjects/PiSquad@Esprit/src/bemyguest/DAO/Classe/UserDAO.java</file>
+            <file>file:/C:/Users/Oussaa/Documents/NetBeansProjects/PiSquad@Esprit/src/bemyguest/controller/GestionAdminController.java</file>
         </group>
     </open-files>
 </project-private>
