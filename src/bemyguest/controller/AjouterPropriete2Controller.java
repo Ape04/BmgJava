@@ -20,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -71,6 +72,10 @@ public class AjouterPropriete2Controller implements Initializable {
     private WebView mapview;
     @FXML
     private JFXComboBox<String> comboVille;
+    @FXML
+    private AnchorPane an2;
+    @FXML
+    private JFXButton accueil;
 
     /**
      * Initializes the controller class.
@@ -126,7 +131,6 @@ public class AjouterPropriete2Controller implements Initializable {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(home_page_scene);
         app_stage.show();
-
     }
 
     @Override
@@ -270,11 +274,7 @@ public class AjouterPropriete2Controller implements Initializable {
 
     @FXML
     private void accueil(ActionEvent event) throws IOException {
-         Parent form2 = FXMLLoader.load(getClass().getResource("/bemyguest/GUI/FXML/FXMLAccueil.fxml"));
-        Scene home_page_scene = new Scene(form2);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page_scene);
-        app_stage.show();
+         an2.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/AcceuilFXML.fxml")));
     }
 
 }

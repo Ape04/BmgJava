@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="626.0" prefWidth="813.0" style="-fx-background-color: #dedede;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.AjouterPropriete3Controller">
+<AnchorPane id="AnchorPane" fx:id="an3" prefHeight="626.0" prefWidth="813.0" style="-fx-background-color: #dedede;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.AjouterPropriete3Controller">
    <children>
       <JFXButton layoutX="619.0" layoutY="579.0" onAction="#valider" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: linear-gradient(#54beef, #2ea1d7);" text="valider" textFill="WHITE" />
       <Pane prefHeight="48.0" prefWidth="813.0" style="-fx-background-color: #26778f;">
@@ -35,7 +35,7 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton buttonType="RAISED" layoutX="436.0" layoutY="579.0" onAction="#retour" prefHeight="34.0" prefWidth="132.0" style="-fx-background-color: #DC143C;" text="Retour" textFill="WHITE" />
+      <JFXButton fx:id="retour" buttonType="RAISED" layoutX="436.0" layoutY="579.0" onAction="#retour" prefHeight="34.0" prefWidth="132.0" style="-fx-background-color: #DC143C;" text="Retour" textFill="WHITE" />
       <Label fx:id="lblan" layoutX="158.0" layoutY="226.0" text="obligatoire" visible="false" />
       <Label fx:id="lbldes" layoutX="455.0" layoutY="74.0" text="obligatoire" visible="false" />
       <Label fx:id="lblfu" layoutX="159.0" layoutY="283.0" text="obligatoire" visible="false" />
@@ -69,7 +69,7 @@
             <JFXRadioButton fx:id="radio8" layoutX="222.0" layoutY="6.0" text="Non" />
          </children>
       </Pane>
-      <JFXButton layoutX="619.0" layoutY="65.0" onAction="#accueil" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: #F08080;" text="Accueil" textFill="WHITE" />
+      <JFXButton fx:id="accueil" layoutX="619.0" layoutY="65.0" onAction="#accueil" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: #F08080;" text="Accueil" textFill="WHITE" />
       <JFXTextField fx:id="urlText" layoutX="38.0" layoutY="555.0" visible="false" />
       <JFXTextField fx:id="url1Text" layoutX="171.0" layoutY="555.0" maxWidth="100.0" minWidth="100.0" prefHeight="31.0" prefWidth="100.0" visible="false" />
       <JFXTextField fx:id="url2Text" layoutX="181.0" layoutY="565.0" maxWidth="100.0" minWidth="100.0" prefHeight="31.0" prefWidth="100.0" visible="false" />

@@ -61,6 +61,8 @@ public class AjouterPropriete1Controller implements Initializable {
     private Label lblPrix;
     @FXML
     private Spinner<String> spinner = new Spinner<String>();
+    @FXML
+    private JFXButton accueil;
 
     static int nbrVoyageur;
     String str;
@@ -153,18 +155,14 @@ public class AjouterPropriete1Controller implements Initializable {
         comboNbrChambre.getItems().add("2 Chambres");
         comboNbrChambre.getItems().add("3 Chambres");
         comboNbrChambre.getItems().add("4 Chambres");
-
         comboNbrChambre.getItems().add("5 Chambres");
 
     }
 
     @FXML
     private void accueil(ActionEvent event) throws IOException {
-         Parent form2 = FXMLLoader.load(getClass().getResource("/bemyguest/GUI/FXML/FXMLAccueil.fxml"));
-        Scene home_page_scene = new Scene(form2);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page_scene);
-        app_stage.show();
+         an1.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/AcceuilFXML.fxml")));
     }
+    
 
 }

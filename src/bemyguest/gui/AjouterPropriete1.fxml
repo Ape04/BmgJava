@@ -69,7 +69,7 @@
          </font>
       </Label>
       <JFXComboBox fx:id="comboNbrChambre" layoutX="68.0" layoutY="414.0" prefHeight="34.0" prefWidth="239.0" style="-fx-background-color: #FFFFFF;" />
-      <JFXButton buttonType="RAISED" layoutX="570.0" layoutY="60.0" onAction="#accueil" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #F08080;" text="Accueil" textFill="WHITE" />
+      <JFXButton fx:id="accueil" buttonType="RAISED" layoutX="570.0" layoutY="60.0" onAction="#accueil" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #F08080;" text="Accueil" textFill="WHITE" />
       <Label layoutX="36.0" layoutY="465.0" prefHeight="20.0" prefWidth="42.0" text="Prix">
          <font>
             <Font name="Times New Roman" size="18.0" />

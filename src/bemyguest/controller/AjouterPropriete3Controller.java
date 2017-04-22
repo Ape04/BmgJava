@@ -54,6 +54,7 @@ import javafx.util.Duration;
 import javax.imageio.ImageIO;
 import org.controlsfx.control.Notifications;
 import static bemyguest.DAO.Classe.UserDAO.j;
+import javafx.scene.layout.AnchorPane;
 
 
 /**
@@ -132,7 +133,13 @@ public class AjouterPropriete3Controller implements Initializable {
 
     @FXML
     private JFXTextField url2Text;
-
+    
+    @FXML
+    private AnchorPane an3;
+    @FXML
+    private JFXButton retour;
+    @FXML
+    private JFXButton accueil;
 
     /**
      * Initializes the controller class.
@@ -330,7 +337,7 @@ public class AjouterPropriete3Controller implements Initializable {
 
     @FXML
     private void retour(ActionEvent event) throws IOException {
-        Parent form = FXMLLoader.load(getClass().getResource("/bemyguest/GUI/FXML/FXMLForm2.fxml"));
+        Parent form = FXMLLoader.load(getClass().getResource("/bemyguest/gui/AjouterPropriete2.fxml"));
         Scene home_page_scene = new Scene(form);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         app_stage.setScene(home_page_scene);
@@ -418,10 +425,6 @@ public class AjouterPropriete3Controller implements Initializable {
 
     @FXML
     private void accueil(ActionEvent event) throws IOException {
-          Parent form2 = FXMLLoader.load(getClass().getResource("/bemyguest/GUI/FXML/FXMLAccueil.fxml"));
-        Scene home_page_scene = new Scene(form2);
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        app_stage.setScene(home_page_scene);
-        app_stage.show();
+         an3.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/AcceuilFXML.fxml")));
     }
 }
