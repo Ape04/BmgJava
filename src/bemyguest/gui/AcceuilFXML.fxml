@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="acc" prefHeight="756.0" prefWidth="1489.0" styleClass="backGroundPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.AcceuilController">
+<AnchorPane id="AnchorPane" fx:id="acc" prefHeight="756.0" prefWidth="1489.0" styleClass="backGroundPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.AcceuilController">
    <children>
       <AnchorPane fx:id="afficher" layoutX="175.0" layoutY="117.0" prefHeight="608.0" prefWidth="1186.0" styleClass="corpsPane">
          <children>
@@ -99,7 +99,7 @@
                   <String fx:value="bgMessage" />
                </styleClass>
             </Button>
-            <Button fx:id="traiter_reservation" layoutY="299.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Traiter Reservation" textFill="WHITE">
+            <Button fx:id="traiter_reservation" layoutY="299.0" mnemonicParsing="false" onAction="#traiterReservation" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="Traiter Reservation" textFill="WHITE">
                <padding>
                   <Insets left="50.0" />
                </padding>
@@ -117,7 +117,7 @@
                   <String fx:value="bgCup" />
                </styleClass>
             </Button>
-            <Button fx:id="menuClub1" layoutY="254.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="List Reservation" textFill="WHITE">
+            <Button fx:id="listReservation" layoutY="254.0" mnemonicParsing="false" onAction="#listReservation" prefHeight="45.0" prefWidth="165.0" style="-fx-alignment: baseline-left;" text="List Reservation" textFill="WHITE">
                <padding>
                   <Insets left="50.0" />
                </padding>

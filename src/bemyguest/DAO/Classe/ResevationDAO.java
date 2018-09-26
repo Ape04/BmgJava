@@ -19,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 
 import java.util.ArrayList;
@@ -155,7 +156,7 @@ try {
             r.setId_r(res.getInt("id_r"));
                             r.setUser(dao.retrieveAdminById(res.getInt("id_u")));
                            r.setPropriete(daoP.getProprieteById(res.getInt("id_p")));
-                           r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_u")));
+                           r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_ud")));
                          r.setEtat(res.getString("etat"));
                         r.setDateDebut(res.getDate("dateDebut")); 
                         r.setDateFin(res.getDate("dateFin"));
@@ -194,7 +195,7 @@ try {
                               r.setId_r(res.getInt("id_r"));
                             r.setUser(dao.retrieveAdminById(res.getInt("id_u")));
                            r.setPropriete(daoP.getProprieteById(res.getInt("id_p")));
-                             r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_u")));
+                             r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_ud")));
                         r.setEtat(res.getString("etat")); 
 
                         r.setDateDebut(res.getDate("dateDebut")); 
@@ -215,19 +216,23 @@ try {
      /**********************************************************Inserer Reservation dans BD****************************************************************/ 
     @Override
     public void inserer(Resrevation r) {
-              String req1 = "insert into reservation (dateDebut,dateFin,id_u,id_p) VALUES (?,?,?,?) ";  
+              String req1 = "insert into reservation (dateDebut,dateFin,id_u,id_p,etat,id_ud) VALUES (?,?,?,?,?,?) ";  
        
       try {
         
       java.sql.Date sqlDate1 = new java.sql.Date(r.getDateDebut().getTime()); 
        java.sql.Date sqlDate2 = new java.sql.Date(r.getDateFin().getTime());  
-          pre = connexion.prepareStatement(req1);
+          
+       pre = connexion.prepareStatement(req1);
      pre.setDate(1, sqlDate1);
        pre.setDate(2, sqlDate2);
         
         pre.setInt(3,r.getUser().getId_u());
        pre.setInt(4,r.getPropriete().getId());
-      pre.execute();
+        pre.setString(5,"false");
+       pre.setInt(6,r.getUserDemandant().getId_u());
+        pre.setDate(4, (java.sql.Date) new Date());
+       pre.execute();
    
      
       } catch (SQLException ex) {
@@ -247,7 +252,7 @@ try {
            
         
         List <Propriete> listPropriete = new ArrayList<>();    
-        Propriete p ;
+     
         String req2="Select   *from propriete  where id_p not in ( Select id_p from reservation ) ";
     
   
@@ -257,13 +262,10 @@ try {
          
         while (res.next()) {
        ProprieteCrud daoP = new ProprieteCrud() ; 
-          
+           Propriete p = new  Propriete ();
        p=daoP.getProprieteById(res.getInt("id_p"));
-                           
-       if ( ! listPropriete.contains(p))
-            
-            listPropriete.add(p);
-        
+        listPropriete.add(p);
+     
         }
       } catch (SQLException ex) {
           Logger.getLogger(ResevationDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -314,7 +316,7 @@ ProprieteCrud daoP = new ProprieteCrud() ;
             r.setId_r(res.getInt("id_r"));
                              
                 
-                             r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_u")));
+                             r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_ud")));
                         r.setEtat(res.getString("etat"));
            
                             r.setUser(dao.retrieveAdminById(res.getInt("id_u")));
@@ -364,7 +366,7 @@ UserDAO dao = new UserDAO();
                              r.setUser(dao.retrieveAdminById(res.getInt("id_u")));
                            r.setPropriete(daoP.getProprieteById(res.getInt("id_p")));
                             
-                            r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_u")));
+                            r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_ud")));
                         r.setEtat(res.getString("etat"));
                         r.setDateDebut(res.getDate("dateDebut")); 
                         r.setDateFin(res.getDate("dateFin"));
@@ -406,7 +408,7 @@ UserDAO dao = new UserDAO();
                             r.setUser(dao.retrieveAdminById(res.getInt("id_u")));
                            r.setPropriete(daoP.getProprieteById(res.getInt("id_p")));
                             
-                             r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_u")));
+                             r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_ud")));
                          r.setEtat(res.getString("etat"));
                         r.setDateDebut(res.getDate("dateDebut")); 
                         r.setDateFin(res.getDate("dateFin"));
@@ -448,16 +450,16 @@ try {
     }
 
     @Override
-    public List getListDemandReservation() {
+    public List getListDemandReservation(int id ) {
             List<Resrevation> tousLesReservation = new ArrayList<>();      
   
 ProprieteCrud daoP = new ProprieteCrud() ; 
           UserDAO dao = new UserDAO(); 
       
-   String req ="SELECT *FROM reservation where etat='false' ORDER BY dateDebut ";
+   String req ="SELECT *FROM reservation where id_u='"+id+"' and etat='false' ORDER BY dateDebut ";
       try {
           
-            ste = connexion.createStatement();
+           ste = connexion.createStatement();
             ResultSet res =  ste .executeQuery(req);
         while (res.next()) {
         Resrevation r = new Resrevation() ;
@@ -468,8 +470,8 @@ ProprieteCrud daoP = new ProprieteCrud() ;
            
                             r.setUser(dao.retrieveAdminById(res.getInt("id_u")));
                            r.setPropriete(daoP.getProprieteById(res.getInt("id_p")));
-                            
-
+                             r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_ud")));
+                         r.setEtat(res.getString("etat"));
                         r.setDateDebut(res.getDate("dateDebut")); 
                         r.setDateFin(res.getDate("dateFin"));
         
@@ -513,7 +515,7 @@ ProprieteCrud daoP = new ProprieteCrud() ;
             r.setId_r(res.getInt("id_r"));
                             r.setUser(dao.retrieveAdminById(res.getInt("id_u")));
                            r.setPropriete(daoP.getProprieteById(res.getInt("id_p")));
-                             r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_u")));
+                             r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_ud")));
                         r.setEtat(res.getString("etat"));
 
                         r.setDateDebut(res.getDate("dateDebut")); 
@@ -539,13 +541,13 @@ ProprieteCrud daoP = new ProprieteCrud() ;
     }
 
     @Override
-    public List getListReservationTraiter() {
+    public List getListReservationTraiter(int id ) {
                List<Resrevation> tousLesReservation = new ArrayList<>();      
   
 ProprieteCrud daoP = new ProprieteCrud() ; 
           UserDAO dao = new UserDAO(); 
       
-   String req ="SELECT *FROM reservation where etat='true' ORDER BY dateDebut ";
+   String req ="SELECT *FROM reservation where id_u='"+id+"' and etat='true' ORDER BY dateDebut ";
       try {
           
             ste = connexion.createStatement();
@@ -559,8 +561,8 @@ ProprieteCrud daoP = new ProprieteCrud() ;
            
                             r.setUser(dao.retrieveAdminById(res.getInt("id_u")));
                            r.setPropriete(daoP.getProprieteById(res.getInt("id_p")));
-                            
-
+                              r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_ud")));
+                          r.setEtat(res.getString("etat"));
                         r.setDateDebut(res.getDate("dateDebut")); 
                         r.setDateFin(res.getDate("dateFin"));
          
@@ -581,7 +583,9 @@ ProprieteCrud daoP = new ProprieteCrud() ;
 
     @Override
     public boolean deleteDemande( ) {
-      List<Resrevation>  l=  this.getListDemandReservation();
+     int id=1;
+        
+        List<Resrevation>  l=  this.getListDemandReservation(id);
       
        
    
@@ -645,7 +649,7 @@ return false ;
           
         
           while (res.next()) {
-        Resrevation r = new   Resrevation();
+       
               UserDAO dao = new UserDAO();
           ProprieteCrud daoP = new ProprieteCrud() ;       
                  
@@ -674,6 +678,9 @@ return false ;
         ListPropriete.add(prop);
         
         }
+      
+      return ListPropriete;
+      
       } catch (SQLException ex) {
           Logger.getLogger(ResevationDAO.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -702,7 +709,7 @@ return false ;
             r.setId_r(res.getInt("id_r"));
                             r.setUser(dao.retrieveAdminById(res.getInt("id_u")));
                            r.setPropriete(daoP.getProprieteById(res.getInt("id_p")));
-                           r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_u")));
+                           r.setUserDemandant(dao.retrieveAdminById(res.getInt("id_ud")));
                          r.setEtat(res.getString("etat"));
                         r.setDateDebut(res.getDate("dateDebut")); 
                         r.setDateFin(res.getDate("dateFin"));
@@ -727,7 +734,7 @@ public List <Propriete> comparer (Date date_Debut,Date date_Fin ){
 List<Resrevation> l2;
 
 
-       proprieteLibre=this.getListProprieteSansReservation();
+       
       
         List<Resrevation>  l=  this.tousLesReservation();
     ProprieteCrud daoP = new ProprieteCrud();
@@ -735,51 +742,42 @@ List<Resrevation> l2;
   
  
  
- 
+
  
  l2=this.listReservationParId(l.get(i).getPropriete().getId());
   
- if (l2.size()==1){
-    if (date_Debut.compareTo(l2.get((l2.size())-1).getDateFin())>0) { 
-   if (!proprieteLibre.contains(daoP.getProprieteById(l2.get(0).getPropriete().getId()))){
-          proprieteLibre.add(daoP.getProprieteById(l2.get(0).getPropriete().getId()));
-            System.out.println("hello bouhmid 0");
-      }
-    
-    }
-  
-  }
+
  for( int j=0 ; j<l2.size()-1;j++ ){  
   
-    if (!( date_Debut.compareTo(l2.get(j).getDateFin())==0||( date_Debut.compareTo(l2.get(j).getDateDebut())==0)||( date_Debut.compareTo(l2.get(j).getDateDebut())==0)||( date_Fin.compareTo(l2.get(j).getDateDebut())==0))){
+  //  if (!( date_Debut.compareTo(l2.get(j).getDateFin())==0||( date_Debut.compareTo(l2.get(j).getDateDebut())==0)||( date_Debut.compareTo(l2.get(j).getDateDebut())==0)||( date_Fin.compareTo(l2.get(j).getDateDebut())==0))){
      
       
       
             if (date_Debut.compareTo(l2.get((l2.size())-1).getDateFin())>0) {   
 
-      if (!proprieteLibre.contains(daoP.getProprieteById(l2.get(j).getPropriete().getId()))){
+      
           proprieteLibre.add(daoP.getProprieteById(l2.get(j).getPropriete().getId()));
-            System.out.println("hello bouhmid 1");
-      }
+           
+      
             }
         
         
     else  if  (date_Debut.compareTo(l2.get(j).getDateFin())>0 && date_Fin.compareTo(l2.get(j+1).getDateDebut())<0 ){
- if (!proprieteLibre.contains(daoP.getProprieteById(l2.get(j).getPropriete().getId()))){
-   proprieteLibre.add(daoP.getProprieteById(l2.get(j).getPropriete().getId()));
-   System.out.println("hello bouhmid 2");
  
-   }}
+   proprieteLibre.add(daoP.getProprieteById(l2.get(j).getPropriete().getId()));
+  
+ 
+   }
   
       
    else  if (date_Fin.compareTo(l2.get((0)).getDateDebut())<0)  {  
-   System.out.println (l2.get((0)).getDateDebut());
+  
        
-       if (!proprieteLibre.contains(daoP.getProprieteById(l2.get(j).getPropriete().getId()))){
+      
       proprieteLibre.add(daoP.getProprieteById(l2.get(j).getPropriete().getId()));   
   
  
-    } }
+    } 
    
         
         }
@@ -789,32 +787,60 @@ List<Resrevation> l2;
  
    
 
+ }
 
-
-}
+//}
+        
+        
+     List<Propriete>l3=this.getListProprieteSansReservation();
+        
+        for (int i=0; i <l3.size () ;i++)
+        {
+     System.out.println(l3.get(i));
+            
+            proprieteLibre.add(l3.get(i));
+        
         }
-        
-        
-        
-        return this.filtrePropriete(proprieteLibre);
+            
+            return proprieteLibre;
                 
 
 
 
 }
 
-public List <Propriete> filtrePropriete (List <Propriete> l){
-List<Propriete> l1 = new ArrayList ();
-for (int i=0;i<l.size()-1;i++){
+    @Override
+    public List<Propriete>Test(Date date_Debut,Date date_Fin) {
+   List<Propriete>  listPropriete = new ArrayList(); 
+ String req =" SELECT propriete.*FROM propriete LEFT OUTER JOIN reservation ON ( propriete.id_p = reservation.id_p AND ( '"+date_Debut+"' BETWEEN reservation.dateDebut AND reservation.dateFin OR '"+date_Fin+"'   BETWEEN reservation.dateDebut AND reservation.dateFin OR reservation.dateDebut BETWEEN '"+date_Debut+"' AND '"+date_Fin+"' OR reservation.dateFin   BETWEEN '"+date_Debut+"' AND '"+date_Fin+"' ))WHERE reservation.id_p IS NOT NULL";
 
-if(!l1.contains(l.get(i)))
-   l1.add(l.get(i));
+try {
+           ste = connexion.createStatement();
+            ResultSet res =  ste .executeQuery(req);
+         
+        while (res.next()) {
+       ProprieteCrud daoP = new ProprieteCrud() ; 
+           Propriete p = new  Propriete ();
+       p=daoP.getProprieteById(res.getInt("id_p"));
+        listPropriete.add(p);
+     
+        }
+      } catch (SQLException ex) {
+          Logger.getLogger(ResevationDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }  
+        
+        
+        
+        
+        return listPropriete;
+    
+    
+    
+    }
+    
+    
     }
 
-
-return l1;
-}
-}
 
 
 

@@ -5,15 +5,32 @@
  */
 package bemyguest.controller;
 
+import bemyguest.DAO.Classe.ExperienceDAO;
+import bemyguest.DAO.Classe.ImageExperienceCrud;
+import bemyguest.DAO.Classe.ProprieteCrud;
 import bemyguest.DAO.Classe.ResevationDAO;
+import bemyguest.entities.Experience;
+import bemyguest.entities.ImageExperience;
 import bemyguest.entities.Propriete;
+
 import bemyguest.entities.Resrevation;
+import bemyguest.entities.User;
+
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,23 +38,35 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import static bemyguest.DAO.Classe.UserDAO.j;
 /**
  *
  * @author HP
  */
 public class ReservationController implements Initializable {
+    
+      @FXML
+    private AnchorPane paneReservation;
+    
+    @FXML
+    private Pane PaneDetails;
     @FXML
     private AnchorPane emchi ;
     @FXML
@@ -87,12 +116,11 @@ public class ReservationController implements Initializable {
     private TableColumn<?, ?> col_nom;
 
     @FXML
-    private Button btn_annuler;
+    private Button btn_supprimer;
 
     @FXML
     private Button btn_afficher;
-   
-   
+  static int idp;
     @FXML
     private void handleButtonAffficherAction(ActionEvent event) {
 //      try {
@@ -143,6 +171,8 @@ public class ReservationController implements Initializable {
      LoadDataPropriete();
         setCellTable();
     
+   
+    
     }
      @FXML
     private void handleButtonVoirReservationAction(ActionEvent event){
@@ -156,13 +186,15 @@ public class ReservationController implements Initializable {
                 alert.setContentText("selectionner une Propriete svp!");
 
                 alert.showAndWait();
-          //      LoadData();
+              LoadDataPropriete();
               setCellTable();
               }
-    LoadData(1);
+    LoadData(e.getId());
     setCellTable();
      LoadDataPropriete();
         setCellTable();
+    
+    
     }
      
     
@@ -177,9 +209,12 @@ public class ReservationController implements Initializable {
                 alert.setContentText("selectionner une reservation svp!");
 
                 alert.showAndWait();
-          //      LoadData();
+                LoadData(idp);
               setCellTable();
-              }
+               LoadDataPropriete();
+        setCellTable();
+    
+                }
     
     else {
                Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -191,13 +226,30 @@ Optional<ButtonType> answer =alert.showAndWait();
             if (answer.get() == ButtonType.OK) {
    ResevationDAO dao = new ResevationDAO() ;
               dao.delete(e);
-                   //  LoadData();
+                     LoadData(idp);
               setCellTable();
+                   LoadDataPropriete();
+                  setCellTable();
+                 alert.setTitle("Success Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Supprission avec success :)");
+                
+                alert.showAndWait();
+                 LoadData(idp);
+              setCellTable();
+                
+                LoadDataPropriete();
+              setCellTable();
+            
+            
             }
             
             else { 
-             //  LoadData();
+              LoadData(idp);
               setCellTable();
+             LoadDataPropriete();
+              setCellTable();
+            
             }
             }
     
@@ -215,18 +267,18 @@ Optional<ButtonType> answer =alert.showAndWait();
                 alert.setContentText("selectionner une reservation svp!");
 
                 alert.showAndWait();
-             //   LoadData();
+                LoadData(idp);
               setCellTable();
               }
-
+    else {
   ResevationDAO dao = new ResevationDAO() ;
   Resrevation r=dao.ReservationById(e.getId_r());
     label_nom.setText("Nom :"+r.getUser().getNom());
-     label_prenom.setText("Prenom :"+r.getUser().getPrenom());
+     label_prenom.setText("Prenom :"+r.getUserDemandant().getPrenom());
      label_des.setText("Description de Hot :"+r.getPropriete().getDescription());
       label_cat.setText("Categorie de Hot :"+r.getPropriete().getCategoriePropriete());
      label_ville.setText("Ville de Hot :"+r.getPropriete().getVille());
-    
+    }
     }
      @FXML
    private void    handleButtonListAction(ActionEvent event) throws IOException{
@@ -236,14 +288,23 @@ Optional<ButtonType> answer =alert.showAndWait();
  //emchi.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("ValiderFXML.fxml")));
  //setDataPane(fadeAnimate("ValiderFXML.fxml"));
        //   FileChooser fileChooser = new FileChooser();  
-     emchi.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/ValiderFXML.fxml")));
- setDataPane(fadeAnimate("/bemyguest/gui/ValiderFXML.fxml"));
+    ; 
+    emchi.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/ConsulterReFXML.fxml")));
+ setDataPane(fadeAnimate("/bemyguest/gui/ConsulterReFXML.fxml"));
           FileChooser fileChooser = new FileChooser(); 
+   
+   
    
    
    }
    
-   
+      @FXML
+  private void ChercherPorpriete(ActionEvent event) throws IOException {
+
+    emchi.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/AcFXML.fxml")));
+ setDataPane(fadeAnimate("/bemyguest/gui/AcFXML.fxml"));
+          FileChooser fileChooser = new FileChooser();  
+  }
     
       @FXML  
   private void  handleButtonTraiterAction(ActionEvent event)throws Exception{         
@@ -259,15 +320,19 @@ Optional<ButtonType> answer =alert.showAndWait();
       //  stage.setScene(scene);   bemyguest.gui 
       //  stage.show();
   
-     emchi.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/ConsulterReFXML.fxml")));
- setDataPane(fadeAnimate("/bemyguest/gui/ConsulterReFXML.fxml"));
-          FileChooser fileChooser = new FileChooser();   
+      
+  
+    emchi.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/ValiderFXML.fxml")));
+ setDataPane(fadeAnimate("/bemyguest/gui/ValiderFXML.fxml"));
+          FileChooser fileChooser = new FileChooser(); 
+  
   }
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+       
     
     }    
     
@@ -283,15 +348,15 @@ private void setCellTable() {
         data.clear();
         data1.clear();
        
-        int idUserConnecte=1;
+        int idUserConnecte=j;
        List <Resrevation>  l ;      
          ResevationDAO rdao = new  ResevationDAO() ;
          
-         l=rdao.getListReservationByPropriete(id);
+         l=rdao.getListReservationByPropriete(2);
       
          for (int i=0 ; i<l.size();i++){
          
-                data.add(new Resrevation(l.get(i).getId_r(), l.get(i).getUser(), l.get(i).getPropriete(), l.get(i).getDateDebut(), l.get(i).getDateFin()));
+                data.add(new Resrevation( l.get(i).getUser(),l.get(i).getUserDemandant(), l.get(i).getId_r(),l.get(i).getPropriete(), l.get(i).getDateDebut(), l.get(i).getDateFin(),l.get(i).getEtat()));
 
            
        }
@@ -303,7 +368,13 @@ private void setCellTable() {
     }
 
 private void LoadDataPropriete() {
-int idUserConnecte=1;
+
+  
+        data1.clear();
+       
+     
+    
+    int idUserConnecte=j;
       
          ResevationDAO rdao = new  ResevationDAO() ;
           List <Propriete>  l2;
@@ -311,9 +382,10 @@ int idUserConnecte=1;
 
  for (int i=0 ; i<l2.size();i++){
          
-           data1.add(new Propriete(l2.get(i).getVille(),l2.get(i).getRue(),l2.get(i).getUser())); //kenet getUtilisateur radithha getUser 5ater ena fel entité propriete msamih User not utilisateur
+           data1.add(new Propriete(l2.get(i).getVille(),l2.get(i).getRue(),l2.get(i).getId()));
          
-       }
+           
+ }
 
  tab_hot.setItems(data1);
 
@@ -339,7 +411,99 @@ int idUserConnecte=1;
         return v;
     }
 
+public void test (Resrevation e){
+ ResevationDAO dao = new ResevationDAO() ;
+  Resrevation r=dao.ReservationById(e.getId_r());
+    label_nom.setText("Nom :"+r.getUser().getNom());
+     label_prenom.setText("Prenom :"+r.getUser().getPrenom());
+     label_des.setText("Description de Hot :"+r.getPropriete().getDescription());
+      label_cat.setText("Categorie de Hot :"+r.getPropriete().getCategoriePropriete());
+     label_ville.setText("Ville de Hot :"+r.getPropriete().getVille());
+}
 
+ @FXML
+    private void handleButtonAffficherrDetailleAction() {    
+       
+        
+        tab_reservation.setOnMouseClicked((MouseEvent e) -> {
+         Resrevation e1= tab_reservation.getSelectionModel().getSelectedItem();
+    if (e==null) {
+             
+                Alert alert = new Alert(AlertType.WARNING);
+                 alert.setTitle("Warning Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("selectionner une reservation svp!");
+
+                alert.showAndWait();
+                LoadData(idp);
+              setCellTable();
+              }
+
+  ResevationDAO dao = new ResevationDAO() ;
+  Resrevation r=dao.ReservationById(e1.getId_r());
+     PaneDetails.setVisible(true);
+   FadeTransition ft = new FadeTransition(Duration.millis(1500));
+        ft.setNode(PaneDetails);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+    
+     
+     label_nom.setText("Nom :"+r.getUserDemandant().getNom());
+     label_prenom.setText("Prenom :"+r.getUserDemandant().getPrenom());
+     label_des.setText("Description de Hot :"+r.getPropriete().getDescription());
+      label_cat.setText("Categorie de Hot :"+r.getPropriete().getCategoriePropriete());
+     label_ville.setText("Ville de Hot :"+r.getPropriete().getVille());
+        
+        });
+ }
+
+
+ @FXML
+  private void ConsulterReservation() {    
+      paneReservation.setVisible(true);
+       btn_supprimer.setVisible(true); 
+      FadeTransition ft = new FadeTransition(Duration.millis(1500));
+        ft.setNode( paneReservation);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+         FadeTransition ft1 = new FadeTransition(Duration.millis(1500));
+        ft1.setNode(btn_supprimer);
+        ft1.setFromValue(0.1);
+        ft1.setToValue(1);
+        ft1.setCycleCount(1);
+        ft1.setAutoReverse(false);
+        ft1.play();
+            Propriete e1=  tab_hot.getSelectionModel().getSelectedItem();
+    if (e1==null) {
+             
+                Alert alert = new Alert(AlertType.WARNING);
+                 alert.setTitle("Warning Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("selectionner une reservation svp!");
+
+                alert.showAndWait();
+               LoadDataPropriete();
+              setCellTable();
+        }
+    else{
+        tab_hot.setOnMouseClicked((MouseEvent e) -> {
+    idp=e1.getId();
+  LoadData(e1.getId());
+    setCellTable();
+     LoadDataPropriete();
+        setCellTable();
+  
+    
+        
+        });
+    }
+ }
 
 
 

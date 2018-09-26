@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1055.0" styleClass="corpsPane" stylesheets="@../../bemyguset/resource/mainSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.TraiterReclamationController">
+   <children>
+      <TableView fx:id="tab_reclamation" layoutX="3.0" layoutY="133.0" onMouseClicked="#show" prefHeight="374.0" prefWidth="1049.0">
+         <columns>
+            <TableColumn fx:id="col_contenu" prefWidth="318.0" text="Contenu" />
+            <TableColumn fx:id="col_type" prefWidth="116.0" text="Type" />
+            <TableColumn fx:id="col_date" prefWidth="111.0" text="Date" />
+            <TableColumn fx:id="Colone_Reclamant" prefWidth="149.0" text=" Nom du Reclamant" />
+            <TableColumn fx:id="col_id" minWidth="0.0" prefWidth="0.0" text="id" />
+            <TableColumn fx:id="Column_PrenomReclamant" prefWidth="168.0" text="Prenom du Reclamant" />
+            <TableColumn fx:id="Colone_Reclame" prefWidth="179.0" text="Prenom du Reclamé" />
+         </columns>
+      </TableView>
+      <TextField fx:id="RechercherAdmin" layoutX="821.0" layoutY="64.0" />
+      <Button fx:id="button_supprimer" layoutX="524.0" layoutY="584.0" mnemonicParsing="false" onAction="#SupprimerAction" prefHeight="45.0" prefWidth="187.0" styleClass="btnEnvoyer" text="supprimer" />
+      <Button fx:id="Button_Traiter" layoutX="829.0" layoutY="584.0" mnemonicParsing="false" onAction="#TraiterAction" prefHeight="45.0" prefWidth="170.0" styleClass="btnEnvoyer" text="Traiter" />
+      <Label layoutX="631.0" layoutY="69.0" prefHeight="21.0" prefWidth="170.0" text="Rechercher Reclamation:" />
+   </children>
+</AnchorPane>

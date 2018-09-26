@@ -110,14 +110,7 @@ public Resrevation(int id_r, User user,  Propriete propriete, Date dateDebut, Da
         this.dateFin = dateFin;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + this.id_r;
-        hash = 23 * hash + Objects.hashCode(this.dateDebut);
-        hash = 23 * hash + Objects.hashCode(this.dateFin);
-        return hash;
-    }
+  
 
     public User getUser() {
         return user;

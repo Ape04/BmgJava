@@ -6,9 +6,25 @@
 package bemyguest.controller;
 
 import bemyguest.DAO.Classe.ResevationDAO;
+import bemyguest.entities.Propriete;
 import bemyguest.entities.Resrevation;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -25,16 +41,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.swing.JOptionPane;
+import static bemyguest.DAO.Classe.UserDAO.j;
 /**
  *
  * @author HP
@@ -42,6 +62,13 @@ import javafx.util.Duration;
 public class ValidationResevation implements Initializable {
     
    @FXML
+    private Pane PaneDetails;
+    
+      @FXML
+    private ComboBox cPropriete;
+      @FXML
+      private ComboBox cRue;
+    @FXML
     private Label label_nom ;
    @FXML
     private Label label_prenom;
@@ -90,8 +117,29 @@ public class ValidationResevation implements Initializable {
     Stage stage1 = new Stage ();
    
     Stage stage2 = new Stage ();
-    @FXML
-    private void handleButtonAffficherAction(ActionEvent event) {
+   static int id=j;
+    
+    
+    public void combo(){
+     
+      ResevationDAO dao = new ResevationDAO() ;
+     
+       List <Propriete> l = new ArrayList() ;
+       l=dao.getListProprieteByUser(id);
+       
+        for (int i=0 ;i<l.size();i++){
+       
+           cPropriete.getItems().addAll(l.get(i).getVille());
+           cRue.getItems().addAll(l.get(i).getRue());
+        } 
+    
+     
+    }
+   
+   
+   
+   @FXML
+    private void handleButtonRefuserAction(ActionEvent event) {
 //      try {
           //  System.out.println("You clicked me!");
            // label.setText("Hello World!");
@@ -140,12 +188,44 @@ public class ValidationResevation implements Initializable {
     // setCellTable();
     // LoadData();
      // }
-      data = FXCollections.observableArrayList();
-       data1 = FXCollections.observableArrayList();
-     LoadData();
-        
-        setCellTable();
-  System.out.println(date.getValue());
+     
+    
+       Resrevation e= tab_reservation.getSelectionModel().getSelectedItem();
+    if (e==null) {
+             
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                 alert.setTitle("Warning Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("selectionner une reservation svp!");
+
+                alert.showAndWait();
+               LoadData();
+              setCellTable();
+              }
+    
+    else {
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                 alert.setTitle("Confiramtion");
+                alert.setHeaderText(null);
+                alert.setContentText("vous etes sur de supprimer cette reservation");
+Optional<ButtonType> answer =alert.showAndWait();
+
+            if (answer.get() == ButtonType.OK) {
+   ResevationDAO dao = new ResevationDAO() ;
+              dao.delete(e);
+                    LoadData();
+              setCellTable();
+            }
+            
+            else { 
+              LoadData();
+              setCellTable();
+            }
+            }
+    
+    
+    
+    
     }
     
    @FXML
@@ -158,14 +238,14 @@ public class ValidationResevation implements Initializable {
         stage.show();}
     
     @FXML
-    private void handleButtonValiderAction(ActionEvent event) {
+    private void handleButtonValiderAction(ActionEvent event) throws FileNotFoundException, DocumentException {
      Resrevation e= tab_reservation.getSelectionModel().getSelectedItem();
     if (e==null) {
              
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                  alert.setTitle("Warning Dialog");
                 alert.setHeaderText(null);
-                alert.setContentText("selectionner une reservation svp!");
+                alert.setContentText("selectionner un demande de  reservation a traiter svp!");
 
                 alert.showAndWait();
                 LoadData();
@@ -176,16 +256,88 @@ public class ValidationResevation implements Initializable {
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                  alert.setTitle("Confiramtion");
                 alert.setHeaderText(null);
-                alert.setContentText("vous etes sur de Valider cette reservation");
+                alert.setContentText("vous etes sur d'accepter cette demande de reservation");
 Optional<ButtonType> answer =alert.showAndWait();
 
             if (answer.get() == ButtonType.OK) {
    ResevationDAO dao = new ResevationDAO() ;
-              dao.ajouter_Reservation(e);
-              //  dao.deleteDemande();
+            if  ( dao.ajouter_Reservation(e)){
+            
               LoadData();
               setCellTable();
+           
+              
+                 alert.setTitle("Success Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Demandes accepter avec success");
+
+                alert.showAndWait();
+              
+              
+              
+              
+              try {
+              
+              Document d = new Document (PageSize.A4.rotate());
+            PdfWriter.getInstance(d,new FileOutputStream(e.getUser().getNom()+"Facture.pdf"));
+            d.open();
+            
+            d.add(new Paragraph("BeMyGuest Facture :",FontFactory.getFont(FontFactory.TIMES_BOLD, 18,Font.BOLD,BaseColor.RED)));
+             d.add(new Paragraph(new Date ().toString()));
+            d.add(new Paragraph("-------------------------------------------------------------------------------------------------------------"));
+             d.add(new Paragraph("             "));
+              d.add(new Paragraph("             "));
+             PdfPTable pdt = new  PdfPTable (7);                  
+              PdfPCell cell = new PdfPCell (new Paragraph("Composant de facture"));
+              cell.setColspan(7);
+              cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+              cell.setBackgroundColor(BaseColor.RED);
+              pdt.addCell(cell);
+             
+              pdt.addCell(new Paragraph("Nom:",FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+             pdt.addCell(new Paragraph("Prenom:",FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));  
+            pdt.addCell(new Paragraph("Date Debut:",FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+           pdt.addCell(new Paragraph("Date Fin:",FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+           pdt.addCell(new Paragraph("nbre chambre:",FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+             pdt.addCell(new Paragraph("nbre personne:",FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK))); 
+          pdt.addCell(new Paragraph("Prix:",FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+           pdt.addCell(new Paragraph(e.getUserDemandant().getNom(),FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+             pdt.addCell(new Paragraph(e.getUserDemandant().getPrenom(),FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+            pdt.addCell(new Paragraph(e.getDateDebut().toString(),FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+          pdt.addCell(new Paragraph(e.getDateFin().toString(),FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));  pdt.addCell(e.getDateDebut().toString());  
+           
+      
+          int nb= e.getPropriete().getNbrChambre();
+         
+         
+           float pr= e.getPropriete().getPrix();
+         int nbp = e.getPropriete().getNbrVoyageur();
+          pdt.addCell(new Paragraph(Integer.toString(nb),FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+          pdt.addCell(new Paragraph(Integer.toString(nbp),FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+           pdt.addCell(new Paragraph(Float.toString(pr),FontFactory.getFont(FontFactory.TIMES_BOLD, 8,Font.BOLD,BaseColor.BLACK)));
+            
+           pdt.addCell(Float.toString(pr)); 
+          
+            
+            d.add(pdt);
+          d.close();
             }
+            catch (Exception b){
+                
+                JOptionPane.showMessageDialog(null, b);
+            }}
+            else {
+              alert.setTitle("Error Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Cette Propriete Reserver pendant cette date ");
+
+                alert.showAndWait();
+                
+                LoadData();
+              setCellTable();
+            }
+            }
+           
             
             else { 
                LoadData();
@@ -262,6 +414,11 @@ Optional<ButtonType> answer =alert.showAndWait();
   @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+     data = FXCollections.observableArrayList();
+       data1 = FXCollections.observableArrayList();
+    LoadData();
+    setCellTable();
+    
     
     }    
     
@@ -285,24 +442,44 @@ private void LoadData() {
        List <Resrevation>  l ;      
         List <Resrevation>  l2 ;   
        ResevationDAO rdao = new  ResevationDAO() ;
-       l=rdao.getListDemandReservation();
-     l2=rdao.getListReservationTraiter();
-         for (int i=0 ; i<l.size();i++){
+       l=rdao.getListDemandReservation(j);
+     l2=rdao.getListReservationTraiter(j);
+           
+     
+           
+     
+              
+   
+             
+             for (int i=0 ; i<l.size();i++){
       
                 data.add(new Resrevation(l.get(i).getUser(),l.get(i).getUserDemandant(),l.get(i).getId_r(), l.get(i).getPropriete(), l.get(i).getDateDebut(), l.get(i).getDateFin(),l.get(i).getEtat()));
 
            
        }
-     for (int i=0 ; i<l2.size();i++){
-         
+      
+            
+          
+          
+            
+             for (int i=0 ; i<l2.size();i++){
+                  System.out.println("hello");
                 data1.add(new Resrevation(l2.get(i).getUser(),l2.get(i).getUserDemandant(),l2.get(i).getId_r(), l2.get(i).getPropriete(), l2.get(i).getDateDebut(), l2.get(i).getDateFin(),l2.get(i).getEtat()));
 
            
        }
+            
+             
+       
+                    
+             
+         tab_reservation.setItems(data);
+        tab_reservation_finis.setItems(data1);   
+               
+             
 
       
-        tab_reservation.setItems(data);
-         tab_reservation_finis.setItems(data1);
+       
     }
 
  private void LoadDataReservation() {
@@ -334,7 +511,7 @@ private void LoadDataReservationDemande() {
      l2=rdao.tousLesReservation();
          for (int i=0 ; i<l2.size();i++){
          
-                data.add(new Resrevation(l2.get(i).getId_r(), l2.get(i).getUser(), l2.get(i).getPropriete(), l2.get(i).getDateDebut(), l2.get(i).getDateFin()));
+                data.add(new Resrevation(l2.get(i).getUser(),l2.get(i).getUserDemandant(), l2.get(i).getId_r(),l2.get(i).getPropriete(), l2.get(i).getDateDebut(), l2.get(i).getDateFin(),l2.get(i).getEtat()));
 
            
        }
@@ -378,6 +555,83 @@ private void LoadDataReservationDemande() {
        
          tab_reservation_finis.setItems(data1);
     }
+
+
+ @FXML
+    private void handleButtonAffficherrDetailleAction() {    
+       
+        
+        tab_reservation.setOnMouseClicked((MouseEvent e) -> {
+         Resrevation e1= tab_reservation.getSelectionModel().getSelectedItem();
+    if (e==null) {
+             
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                 alert.setTitle("Warning Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("selectionner une reservation svp!");
+
+                alert.showAndWait();
+             //   LoadData();
+              setCellTable();
+              }
+
+  ResevationDAO dao = new ResevationDAO() ;
+  Resrevation r=dao.ReservationById(e1.getId_r());
+     PaneDetails.setVisible(true);
+   FadeTransition ft = new FadeTransition(Duration.millis(1500));
+        ft.setNode(PaneDetails);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+    
+     
+     label_nom.setText("Nom :"+r.getUserDemandant().getNom());
+     label_prenom.setText("Prenom :"+r.getUserDemandant().getPrenom());
+     label_des.setText("Description de Hot :"+r.getPropriete().getDescription());
+      label_cat.setText("Categorie de Hot :"+r.getPropriete().getCategoriePropriete());
+     label_ville.setText("Ville de Hot :"+r.getPropriete().getVille());
+        
+        });
+ }
+   @FXML
+   private void handleButtonChercherAction(ActionEvent event) {
+     data = FXCollections.observableArrayList();
+       data1 = FXCollections.observableArrayList();
+     LoadData();
+    setCellTable();
+       
+     
+    }
+
+
+private void LoadDatad() {
+        data.clear();
+        data1.clear();
+       List <Resrevation>  l ;      
+        List <Resrevation>  l2 ;   
+       ResevationDAO rdao = new  ResevationDAO() ;
+       l=rdao.getListDemandReservation(j);
+     l2=rdao.getListReservationTraiter(j);
+         for (int i=0 ; i<l.size();i++){
+      
+                data.add(new Resrevation(l.get(i).getUser(),l.get(i).getUserDemandant(),l.get(i).getId_r(), l.get(i).getPropriete(), l.get(i).getDateDebut(), l.get(i).getDateFin(),l.get(i).getEtat()));
+
+           
+       }
+     for (int i=0 ; i<l2.size();i++){
+         
+                data1.add(new Resrevation(l2.get(i).getUser(),l2.get(i).getUserDemandant(),l2.get(i).getId_r(), l2.get(i).getPropriete(), l2.get(i).getDateDebut(), l2.get(i).getDateFin(),l2.get(i).getEtat()));
+
+           
+       }
+
+      
+        tab_reservation.setItems(data);
+         tab_reservation_finis.setItems(data1);
+    }
+
 
 
 

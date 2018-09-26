@@ -110,12 +110,12 @@ public class Propriete {
         this.enfant = enfant;
     }
 
-    public Propriete(String ville, String rue, User user) {
+    public Propriete(String ville, String rue,int id ) {
         this.ville = ville;
         this.rue = rue;
-        this.user = user;
+        this.id=id;
     }
-
+    
     public Propriete(int id, String categoriePropriete, String typePropriete, String ville, int prix) {
         this.id = id;
         this.categoriePropriete = categoriePropriete;

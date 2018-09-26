@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Oussaa/Documents/NetBeansProjects/PiSquad@Esprit/src/bemyguest/DAO/Classe/MessageDAO.java</file>
-            <file>file:/C:/Users/Oussaa/Documents/NetBeansProjects/PiSquad@Esprit/src/bemyguest/config/ConnectionDB.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/BmgJava/src/bemyguest/controller/AjouterController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/BmgJava/src/bemyguest/controller/TraiterReclamationController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/BmgJava/src/bemyguest/entities/Mail.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/BmgJava/src/bemyguest/DAO/Classe/ResevationDAO.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/BmgJava/src/bemyguest/DAO/Classe/ReclamationCrud.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/BmgJava/src/bemyguest/config/ConnectionDB.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/BmgJava/src/Main/PiSquadEsprit.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="793.0" prefWidth="1357.0" styleClass="backGroundPane" stylesheets="@../../bemyguset/resource/mainSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bemyguest.controller.Ajouter_EvaluationController">
+   <children>
+      <AnchorPane fx:id="afficher" layoutX="175.0" layoutY="117.0" prefHeight="611.0" prefWidth="1188.0" styleClass="corpsPane">
+         <children>
+            <ImageView fitHeight="608.0" fitWidth="1291.0" layoutX="2.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/LENOVO/Documents/NetBeansProjects/BEMYGuest/src/Utils/Acceuil.jpg" />
+               </image>
+            </ImageView>
+            <Pane layoutX="14.0" layoutY="21.0" prefHeight="39.0" prefWidth="289.0" styleClass="titleListPane" stylesheets="@../../../../../Desktop/application%20DESKTOP/tft/src/frontend/mainSheet.css">
+               <children>
+                  <Label layoutX="48.0" layoutY="6.0" prefHeight="27.0" prefWidth="207.0" text=" Details De l'avaluation :" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ComboBox fx:id="Combo_Type" layoutX="294.0" layoutY="159.0" prefWidth="150.0" promptText="choisir" />
+            <ComboBox fx:id="Combo_etat" layoutX="288.0" layoutY="228.0" prefWidth="150.0" promptText="choisir" />
+            <ComboBox fx:id="Combo_caractere" layoutX="288.0" layoutY="304.0" prefWidth="150.0" promptText="choisir" />
+            <ComboBox fx:id="Combo_Proprete" layoutX="288.0" layoutY="383.0" prefWidth="150.0" promptText="choisir" />
+            <Label layoutX="65.0" layoutY="162.0" prefHeight="21.0" prefWidth="112.0" text="Type d'aceuil :">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Label layoutX="61.0" layoutY="231.0" prefHeight="25.0" prefWidth="166.0" text="Etat du chambre :">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <Label layoutX="61.0" layoutY="307.0" prefHeight="21.0" prefWidth="165.0" text="Caractere du Host:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <Label layoutX="66.0" layoutY="386.0" text="proprete de la maison">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <Label layoutX="542.0" layoutY="162.0" prefHeight="21.0" prefWidth="150.0" text="Qualite du cuisine :">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <Label layoutX="544.0" layoutY="231.0" prefHeight="21.0" prefWidth="146.0" text="Regelement:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <Label layoutX="69.0" layoutY="489.0" prefHeight="21.0" prefWidth="119.0" text="Qualité prix:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <Label layoutX="540.0" layoutY="398.0" text="Experience globale:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <RadioButton fx:id="rb_2" layoutX="836.0" layoutY="162.0" mnemonicParsing="false" text="Moyenne">
+               <toggleGroup>
+                  <ToggleGroup fx:id="qualite" />
+               </toggleGroup>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rb_1" layoutX="706.0" layoutY="162.0" mnemonicParsing="false" text="Bonne" toggleGroup="$qualite">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rb_3" layoutX="969.0" layoutY="162.0" mnemonicParsing="false" text="Mauvaise" toggleGroup="$qualite">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbR_1" layoutX="706.0" layoutY="231.0" mnemonicParsing="false" text="tres stricte ">
+               <toggleGroup>
+                  <ToggleGroup fx:id="reglement" />
+               </toggleGroup>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbR_2" layoutX="844.0" layoutY="231.0" mnemonicParsing="false" text="Normale" toggleGroup="$reglement">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbQ_1" layoutX="197.0" layoutY="489.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="119.0" text="tres cher">
+               <toggleGroup>
+                  <ToggleGroup fx:id="qualite_p" />
+               </toggleGroup>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbQ_2" layoutX="316.0" layoutY="489.0" mnemonicParsing="false" text="prix raisonable" toggleGroup="$qualite_p">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbQ_3" layoutX="466.0" layoutY="489.0" mnemonicParsing="false" text="bonne affaire" toggleGroup="$qualite_p">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbE_1" layoutX="701.0" layoutY="398.0" mnemonicParsing="false" text="interessante">
+               <toggleGroup>
+                  <ToggleGroup fx:id="experience" />
+               </toggleGroup>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbE_2" layoutX="842.0" layoutY="398.0" mnemonicParsing="false" text="mauvaise" toggleGroup="$experience">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></RadioButton>
+            <Button fx:id="boutton_ajouter" layoutX="980.0" layoutY="501.0" mnemonicParsing="false" onAction="#Button_Ajouter_EV" prefHeight="45.0" prefWidth="151.0" styleClass="btnEnvoyer" stylesheets="@../../../../../Desktop/application%20DESKTOP/tft/src/frontend/mainSheet.css" text="Ajouter" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
+      <Label id="Copyright" layoutX="174.0" layoutY="725.0" prefHeight="65.0" prefWidth="112.0" text="  2017 Copyright" textFill="WHITE" />
+      <Label id="Developped By" layoutX="1161.0" layoutY="725.0" prefHeight="65.0" prefWidth="218.0" text="Developped by Pi_Squad" textFill="WHITE" />
+      <AnchorPane id="titlePane" layoutX="174.0" layoutY="64.0" prefHeight="53.0" prefWidth="1192.0" styleClass="titlePane">
+         <children>
+            <Label fx:id="titelLabel" layoutX="27.0" layoutY="8.0" prefHeight="39.0" prefWidth="289.0" text="Ajouter une evaluation">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

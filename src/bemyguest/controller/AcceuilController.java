@@ -128,6 +128,19 @@ public class AcceuilController implements Initializable {
                 afficher.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/AfficherPropriete.fxml")));
     }
     
+     @FXML
+    private void traiterReservation() throws IOException  {
+       
+                afficher.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/ValiderFXML.fxml")));
+    }
+    @FXML
+    private void listReservation() throws IOException  {
+       
+                afficher.getChildren().setAll( (AnchorPane) FXMLLoader.load(getClass().getResource("/bemyguest/gui/ConsulterReFXML.fxml")));
+    }
+   
+    
+    
     @FXML
     private void GoHome(ActionEvent event) throws IOException {
         Parent login = FXMLLoader.load(getClass().getResource("/bemyguest/gui/Login.fxml"));

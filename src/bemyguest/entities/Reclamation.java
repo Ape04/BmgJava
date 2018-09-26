@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
-package entites;
+package bemyguest.entities;
 
 import bemyguest.entities.User;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -19,23 +20,66 @@ public class Reclamation {
     private String contenu ;
     private User userReclamant;
     private User userReclame;
-
+    private String type ;
+   
+    private Date Date ; 
+     
+    
     public Reclamation() {
     }
 
-    public Reclamation(String contenu, User userReclamant, User userReclame) {
+    public Reclamation(String contenu, User userReclamant, User userReclame, String type, Date Date) {
         this.contenu = contenu;
         this.userReclamant = userReclamant;
         this.userReclame = userReclame;
+        this.type = type;
+        this.Date = Date;
     }
+
+    public Reclamation(int id_rec, String type, Date Date , String contenu) {
+        this.id_rec = id_rec;
+        this.type = type;
+        this.Date = Date;
+        this.contenu=contenu;
+    }
+
     
-    
-    public Reclamation(int id_rec, String contenu, User userReclamant, User userReclame) {
+    public Reclamation(int id_rec, String contenu, User userReclamant, User userReclame, String type, Date Date) {
         this.id_rec = id_rec;
         this.contenu = contenu;
         this.userReclamant = userReclamant;
         this.userReclame = userReclame;
+        this.type = type;
+        this.Date = Date;
     }
+
+    public Reclamation(String contenu, String type) {
+        this.contenu = contenu;
+        this.type = type;
+       
+    }
+    
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+   
+    public Date getDate() {
+        return Date;
+    }
+
+    public void setDate(Date Date) {
+        this.Date = Date;
+    }
+
+    
+    
+    
+    
     
     public User getUserReclamant() {
         return userReclamant;
